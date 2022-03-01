@@ -14,7 +14,6 @@ The application will be a significant improvement over the traditional recipe we
 
 The application will be considered a success based on the user able to navigate easily and the user able to incorporate the application to their daily meal plan. 
 
-
 The application is initially to be developed as an Android application, but future versions can be created for iOS web-application.
 
 For future implementation, we can have a feature to plan the meals. User can plan their meals in the calendar and import the ingrediences to the grocery list. It will be convinience for the user to have their grocery list organized.
