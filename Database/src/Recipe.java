@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /*
 Comp 3350 Software Engineering
@@ -34,5 +36,16 @@ Image of the recipe.
 
 public class Recipe
 {
-
+    // Private member
+    private String name;
+    private String nationality;
+    private ArrayList<String> ingredientList;
+    private int prepTime;
+    private int cookTime;
+    private String cookingSkillLevel;
+    private String description;
+    private ArrayList<String> instructionList;
+    private String link;
+    private boolean vegetarian;
+    private ArrayList<String> filterList;
 }
