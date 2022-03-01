@@ -48,4 +48,27 @@ public class Recipe
     private String link;
     private boolean vegetarian;
     private ArrayList<String> filterList;
+
+    // Public method
+
+    /* Recipe()
+    Constructor to create an instance of recipe.
+    */
+    public Recipe(String name, String nationality, ArrayList<String> ingredientList,
+                  int prepTime, int cookTime, String cookingSkillLevel, String description,
+                  ArrayList<String> instructionList, String link, boolean vegetarian, ArrayList<String> filterList)
+    {
+        this.name = name;
+        this.nationality = nationality;
+        this.ingredientList = ingredientList;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.cookingSkillLevel = cookingSkillLevel;
+        this.description = description;
+        this.instructionList = instructionList;
+        this.link = link;
+        this.vegetarian = vegetarian;
+        this.filterList = filterList;
+    }
+
 }
