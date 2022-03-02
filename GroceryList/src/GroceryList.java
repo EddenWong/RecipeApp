@@ -12,74 +12,39 @@ Public method:
 GroceryList() - Constructor to initialize the linked list.
 addIngredient() - Add the given string ingredient to the list.
 removeIngredient() - Remove the given index of the ingredient from the list.
+getIngredient() - Get the ingredient from a given index
 */
+
+import java.util.LinkedList;
 
 public class GroceryList
 {
-    private GroceryNode groceryList;
+    private final LinkedList<String> groceryList;
 
     public GroceryList()
     {
-        groceryList = null;
+        groceryList = new LinkedList<>();
     }
 
-    public void addIngredient(GroceryNode newIngredient)
+    public void addIngredient(String newIngredient)
     {
-        //List empty
-        if(groceryList == null)
-        {
-            groceryList = newIngredient;
-        }
-        else //List is not empty
-        {
-            GroceryNode current = groceryList;
-
-            while (current.getNext() != null) {
-                //Find end node (one without a next)
-                current = current.getNext();
-            }
-
-            //Set next for end node
-
-            current.setNext(newIngredient);
-
-        }
+        groceryList.add(newIngredient);
     }
 
-    public void removeIngredient(int toRemove)
+    public void removeIngredient(int index)
     {
-        //Make sure head is not null and index is at least 0
-        if(groceryList != null && toRemove >= 0)
+        if(groceryList.size() > index && index >= 0)
         {
-            if(toRemove == 0)
-            {
-                groceryList = null;
-            }
-            else
-            {
-                int currentPosition = 0;
-                GroceryNode currentNode = groceryList;
-                GroceryNode previousNode = currentNode;
-                for(int i = 0; i < toRemove; i++)
-                {
-                    if(currentNode != null)
-                    {
-                        previousNode = currentNode;
-                        currentNode = currentNode.getNext();
-                    }
-                }
-
-                //Make previous node skip over the current node to delete it
-                if(currentNode != null)
-                {
-                    previousNode.setNext(currentNode.getNext());
-                }
-            }
-
-
-
+            groceryList.remove(index);
         }
     }
 
+    public String getIngredient(int index) {
+        String returnIngredient = null;
+        if (groceryList.size() > index && index >= 0) {
+            returnIngredient = groceryList.get(index);
+        }
 
+        return returnIngredient;
+    }
 }
