@@ -85,6 +85,10 @@ public class GroceryList
         return returnIngredient;
     }
 
+    /* numIngredients()
+    Return:
+    Number of ingredient elements in the grocery list.
+    */
     public int numIngredients()
     {
         return this.groceryList.size();

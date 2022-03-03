@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bff9a8ac-3ebd-4d8d-9b38-6546638b3f46" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryList.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryList.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GroceryList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroceryList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroceryListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroceryListTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +40,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="JUnit.GroceryListTest.removeIngredient">
+  <component name="RunManager" selected="JUnit.GroceryListTest.addIngredientTest">
     <configuration name="GroceryListTest.addIngredientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GroceryList" />
       <option name="PACKAGE_NAME" value="" />
@@ -66,8 +63,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GroceryListTest.removeIngredient" />
         <item itemvalue="JUnit.GroceryListTest.addIngredientTest" />
+        <item itemvalue="JUnit.GroceryListTest.removeIngredient" />
       </list>
     </recent_temporary>
   </component>
