@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Assertions;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GroceryListTest {
@@ -5,7 +7,7 @@ class GroceryListTest {
     @org.junit.jupiter.api.Test
     void addIngredientTest()
     {
-        //Assert that a new grocery list is empty
+        //New grocery list is empty
         GroceryList addTest = new GroceryList();
 
         String newIngredient0 = "Flour";
@@ -35,10 +37,10 @@ class GroceryListTest {
         assert(addTest.numIngredients() == 3);
     }
 
-    @org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test()
     void removeIngredient()
     {
-        //Assert that a new grocery list is empty
+        //New grocery list is empty
         GroceryList removeTest = new GroceryList();
 
         //Add three ingredients
@@ -64,5 +66,42 @@ class GroceryListTest {
         //Assert that all ingredients are removed
         removeTest.removeIngredient(0);
         assert(removeTest.numIngredients() == 0);
+
+        //Assert that an IndexOutOfBoundsException is thrown when an improper index is given
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            removeTest.removeIngredient(-1);//Exception
+        });
     }
+
+    @org.junit.jupiter.api.Test()
+    void getIngredient()
+    {
+        //New grocery list is empty
+        GroceryList getTest = new GroceryList();
+
+        //Assert that getting from the empty list throws an exception
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            getTest.getIngredient(-1);//Exception
+        });
+
+        //Add three ingredients
+        String newIngredient0 = "Flour";
+        String newIngredient1 = "Sugar";
+        String newIngredient2 = "Salt";
+
+        getTest.addIngredient(newIngredient0);
+        getTest.addIngredient(newIngredient1);
+        getTest.addIngredient(newIngredient2);
+
+        //Assert that getting each one in order works
+        assert(getTest.getIngredient(0).equals(newIngredient0));
+        assert(getTest.getIngredient(1).equals(newIngredient1));
+        assert(getTest.getIngredient(2).equals(newIngredient2));
+
+        //Assert that an IndexOutOfBoundsException is thrown when an improper index is given
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            getTest.removeIngredient(-1);//Exception
+        });
+    }
+
 }
