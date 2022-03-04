@@ -24,4 +24,4 @@ For future implementation, we can have a feature to plan the meals. User can pla
 
 Below is the link to the ARCHITECTURE.md file that explains our architecture.
 
-[Architecture](\recipe-app\Architecture\ARCHITECTURE.md)
+[Architecture](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/Architecture/ARCHITECTURE.md)
