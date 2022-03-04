@@ -24,5 +24,5 @@ For future implementation, we can have a feature to plan the meals. User can pla
 
 Below is the link to the ARCHITECTURE.md file that explains our architecture.
 
-[Architecture](\Architecture\ARCHITECTURE.md)
+[Architecture](.\Architecture\ARCHITECTURE.md)
 
