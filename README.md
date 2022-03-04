@@ -1,4 +1,5 @@
-# Grocery Recipe App Vision Statement
+# README
+## Grocery Recipe App Vision Statement
 
 The Grocery Recipe App will be used to help users look for recipes and organize their grocery list. Furthermore, it will allow the user to plan their meals.
 
@@ -17,3 +18,11 @@ The application will be considered a success based on the user able to navigate 
 The application is initially to be developed as an Android application, but future versions can be created for iOS web-application.
 
 For future implementation, we can have a feature to plan the meals. User can plan their meals in the calendar and import the ingrediences to the grocery list. It will be convinience for the user to have their grocery list organized.
+
+---
+## Architecture
+
+Below is the link to the ARCHITECTURE.md file that explains our architecture.
+
+[Architecture](\Architecture\ARCHITECTURE.md)
+
