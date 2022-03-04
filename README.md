@@ -34,3 +34,9 @@ Below is the link to the ARCHITECTURE.md file that explains our architecture.
 Below is the link to the Branch-Strategy.md file that explains how we use branching to keep track of our changes in the code.
 
 [Branching Strategy](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/Branching-Strategy.md)
+
+## Worksheet
+
+Below is the link to the Branch-Strategy.md file that explains how we use branching to keep track of our changes in the code.
+
+[Worksheet](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/i1_worksheet.md)
