@@ -16,7 +16,7 @@ How the feature was added:
 Exceptional code
 ----------------
 
-The test of exceptional code can be found [here](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/Branching-Strategy.md).
+The test of exceptional code can be found [here](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/GroceryList/src/GroceryListTest.java).
 
 The functions `getIngredient(int index)` and `removeIngredient(int index)` both throw `IndexOutOfBoundsException` as shown in the tests. These exceptions are thrown as there is the possibility of an improper value being passed into the functions.  They both access specific spots in a linked list so passing an index that is negative or too high will throw an `IndexOutOfBoundsException` which will allow a function that calls it to handle the issue.
 
