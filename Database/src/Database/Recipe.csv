@@ -1,0 +1,31 @@
+﻿Name,Nationality,prepTime,cookTime,cookingSkillLevel,description,link,vegetarian
+Banana Cake,US,15,40,Easy,A,NO,TRUE
+Blueberry Coffee Cake,US,20,35,Easy,B,YES,FALSE
+Chocolate Cake,UK,15,30,Easy,C,NO,TRUE
+Crazy Cake,Spain,5,20,Easy,D,NO,FALSE
+Fresh Apple Cake,US,10,25,Medium,E,NO,TRUE
+Fresh Pear Cake,Italy,10,25,Medium,F,NO,FALSE
+Graham Cracker Cake,US,10,10,Easy,G,NO,TRUE
+Hot Water Chocolate Cake,Germany,20,10,Medium,H,NO,FALSE
+Hungry Bear Cheese Cake,US,20,25,Medium,I,NO,FALSE
+Lemon Poppy Cake,US,10,25,Easy,J,NO,FALSE
+Light Old Fashioned Fruit Cake,Korea,20,25,Easy,K,NO,FALSE
+My Best Gingerbread,US,10,20,Easy,L,NO,FALSE
+Oatmeal Cake,US,20,30,Easy,M,NO,FALSE
+Orange Angel Food Cake,US,10,40,Medium,N,NO,FALSE
+Orange-Poppy Seed Pound Cake,Ukaine,15,20,Medium,O,NO,FALSE
+Pineapple Cake,US,20,30,Hard,P,NO,FALSE
+Pineapple-Carrot Cake,US,20,30,Hard,Q,NO,FALSE
+Potatoe Cake,China,10,20,Medium,R,NO,FALSE
+Refrigerator Cheesecake,US,40,60,Supreme,S,NO,FALSE
+Sherry Wine Cake,Japan,40,50,Hard,T,NO,FALSE
+Special Prune Cake,US,50,55,Hard,U,NO,FALSE
+Spicy Fruit and Nut Cake,US,20,35,Medium,V,NO,FALSE
+Strawberry Spice Loaf,US,60,45,Medium,W,NO,FALSE
+Three Layer Chocolate Mayonnaise Cake,Canada,55,50,Supreme,X,NO,FALSE
+Upside Down Cake,US,45,35,Supreme,Y,NO,FALSE
+Blue Chip Cookies,India,20,20,Easy,Z,NO,FALSE
+Bourbon Balls,US,25,25,Medium,BLA,NO,FALSE
+Chocolate Crisp Bran Cookies,Laos,30,30,Easy,BLO,NO,FALSE
+Chocolate Peanut Brunch Bars,Australia,35,25,Easy,BLI,NO,FALSE
+Chocolate Trio Squares,US,20,30,Easy,BLEM,NO,FALSE
