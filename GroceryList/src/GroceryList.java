@@ -49,15 +49,16 @@ public class GroceryList
     index - Remove the ingredient at given index. Do nothing if element at given
         index does not exist.
     */
-    public void removeIngredient(int index)
+    public void removeIngredient(int index) throws IndexOutOfBoundsException
     {
-        // Pre-condition
-        assert(index >= 0 && index < this.groceryList.size());
-
         // Remove the ingredient at given index
         if(index < groceryList.size() && index >= 0)
         {
             groceryList.remove(index);
+        }
+        else
+        {
+            throw new IndexOutOfBoundsException();
         }
     }
 
@@ -69,16 +70,17 @@ public class GroceryList
     String ingredient at given index in the grocery list.
     Null if the given index is invalid.
     */
-    public String getIngredient(int index)
+    public String getIngredient(int index) throws IndexOutOfBoundsException
     {
-        // Pre-condition
-        assert(index >= 0 && index < this.groceryList.size());
-
         // Get the ingredient string from the grocery list
         String returnIngredient = null;
         if (index < groceryList.size() && index >= 0)
         {
             returnIngredient = groceryList.get(index);
+        }
+        else
+        {
+            throw new IndexOutOfBoundsException();
         }
 
         // Return
