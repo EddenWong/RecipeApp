@@ -52,7 +52,7 @@ public class Recipe
     private int cookTime;
     private String cookingSkillLevel;
     private String description;
-    private ArrayList<String> instructionList;
+    private String instructions;
     private String link;
     private boolean vegetarian;
     private ArrayList<String> filterList;
@@ -64,7 +64,7 @@ public class Recipe
     */
     public Recipe(String name, String nationality, ArrayList<String> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
-                  ArrayList<String> instructionList, String link, boolean vegetarian, ArrayList<String> filterList)
+                  String instructions, String link, boolean vegetarian, ArrayList<String> filterList)
     {
         this.name = name;
         this.nationality = nationality;
@@ -73,7 +73,7 @@ public class Recipe
         this.cookTime = cookTime;
         this.cookingSkillLevel = cookingSkillLevel;
         this.description = description;
-        this.instructionList = instructionList;
+        this.instructions = instructions;
         this.link = link;
         this.vegetarian = vegetarian;
         this.filterList = filterList;
@@ -137,9 +137,9 @@ public class Recipe
     Return:
     The instructions for the recipe.
     */
-    public ArrayList<String> getInstructionList()
+    public String getInstructions()
     {
-        return this.instructionList;
+        return this.instructions;
     }
 
     /* getLink()
