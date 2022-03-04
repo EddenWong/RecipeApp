@@ -6,4 +6,4 @@ We divided the work and assigned each member a task to complete for Iteration 1.
 
 ## Branching Strategy screenshot
 
-![Our branching in action](branch.png)
+![Our branching in action](branch.PNG)
