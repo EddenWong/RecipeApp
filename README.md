@@ -37,6 +37,6 @@ Below is the link to the Branch-Strategy.md file that explains how we use branch
 
 ## Worksheet
 
-Below is the link to the Branch-Strategy.md file that explains how we use branching to keep track of our changes in the code.
+Below is the link to the worksheet file that explains how we use branching to keep track of our changes in the code.
 
 [Worksheet](https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/i1_worksheet.md)
