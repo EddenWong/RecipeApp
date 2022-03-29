@@ -1,12 +1,11 @@
 package objects;
-
 import java.util.ArrayList;
 
 /*
 Comp 3350 Software Engineering
 Group 8
 February 28, 2022
-objects.Recipe.java
+Recipe.java
 
 Public static member:
 recipeList - Linked list of recipes.
@@ -28,7 +27,7 @@ vegetarian - String Yes or No if the food is vegetarian.
 filterList - Linked list of string filter. Holiday like Christmas, New Year, to Seafood.
 
 Public method:
-objects.Recipe() - Constructor to create an instance of recipe.
+Recipe() - Constructor to create an instance of recipe.
 getName() - Get the name of the recipe.
 getNationality() - Get the nationality of the recipe.
 getPrepTime() - Get the prep time for the recipe.
@@ -44,9 +43,9 @@ Future:
 Image of the recipe.
 */
 
-public class Recipe
-{
+public class Recipe {
     // Private member
+    private int recipeID;
     private String name;
     private String nationality;
     private ArrayList<String> ingredientList;
@@ -56,18 +55,18 @@ public class Recipe
     private String description;
     private String instructions;
     private String link;
-    private boolean vegetarian;
-    private ArrayList<String> filterList;
+    private ArrayList<String> categoryList;
 
     // Public method
 
-    /* objects.Recipe()
+    /* Recipe()
     Constructor to create an instance of recipe.
     */
-    public Recipe(String name, String nationality, ArrayList<String> ingredientList,
+    public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
-                  String instructions, String link, boolean vegetarian, ArrayList<String> filterList)
+                  String instructions, String link, ArrayList<String> categoryList)
     {
+        this.recipeID = recipeID;
         this.name = name;
         this.nationality = nationality;
         this.ingredientList = ingredientList;
@@ -77,98 +76,68 @@ public class Recipe
         this.description = description;
         this.instructions = instructions;
         this.link = link;
-        this.vegetarian = vegetarian;
-        this.filterList = filterList;
+        this.categoryList = categoryList;
     }
+
+    public int getRecipeID() { return this.recipeID; }
 
     /* getName()
     Return:
     The name of the recipe.
     */
-    public String getName()
-    {
-        return this.name;
-    }
+    public String getName() { return this.name; }
 
     /* getNationality()
     Return:
     The nationality of the recipe.
     */
-    public String getNationality()
-    {
-        return this.nationality;
-    }
+    public String getNationality() { return this.nationality; }
 
     /* getPrepTime()
     Return:
     Prep time for the recipe.
     */
-    public int getPrepTime()
-    {
-        return this.prepTime;
+
+    public ArrayList<String> getIngredientList() {
+        return this.ingredientList;
     }
+
+    public int getPrepTime() { return this.prepTime; }
 
     /* getCookTime()
     Return:
     The cooking time for the recipe.
     */
-    public int getCookTime()
-    {
-        return this.cookTime;
-    }
+    public int getCookTime() { return this.cookTime; }
 
     /* getCookingSkillLevel()
     Return:
     The cooking skill level for the recipe.
     */
-    public String getCookingSkillLevel()
-    {
-        return this.cookingSkillLevel;
-    }
+    public String getCookingSkillLevel() { return this.cookingSkillLevel; }
 
     /* getDescription()
     Return:
     The description of the recipe.
     */
-    public String getDescription()
-    {
-        return this.description;
-    }
+    public String getDescription() { return this.description; }
 
     /* getInstructionList()
     Return:
     The instructions for the recipe.
     */
-    public String getInstructions()
-    {
-        return this.instructions;
-    }
+    public String getInstructions() { return this.instructions; }
 
     /* getLink()
     Return:
     The link for the recipe tutorial.
     */
-    public String getLink()
-    {
-        return this.link;
-    }
+    public String getLink() { return this.link; }
 
-    /* getVegetarian()
-    Return:
-    Boolean flag if the recipe is a vegetarian recipe.
-    */
-    public boolean getVegetarian()
-    {
-        return this.vegetarian;
-    }
 
     /* getFilter()
     Return:
     The list of filters for the recipe.
     */
-    public ArrayList<String> getFilter()
-    {
-        return this.filterList;
-    }
-
+    public ArrayList<String> getCategoryList() { return this.categoryList; }
 }
