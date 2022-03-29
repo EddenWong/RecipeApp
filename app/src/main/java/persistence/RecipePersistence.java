@@ -1,8 +1,8 @@
-package comp3350.recipeapp.persistence;
+package persistence;
 
 import java.util.List;
 
-import comp3350.recipeapp.objects.Recipe;
+import objects.Recipe;
 
 public interface RecipePersistence {
 

@@ -1,4 +1,4 @@
-package comp3350.recipeapp.persistence.hsqldb;
+package persistence.hsqldb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.recipeapp.objects.Recipe;
-import comp3350.recipeapp.persistence.RecipePersistence;
+import objects.Recipe;
+import persistence.RecipePersistence;
 
 public class RecipePersistenceHSQLDB implements RecipePersistence {
 

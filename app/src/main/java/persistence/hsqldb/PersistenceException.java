@@ -1,4 +1,4 @@
-package comp3350.recipeapp.persistence.hsqldb;
+package persistence.hsqldb;
 
 /**
  * java.sql.SQLException is a checked exception, but our interface doesn't have any
