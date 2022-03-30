@@ -75,6 +75,29 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         }
     }
 
+    @Override
+    public List<Recipe> getRecipe(Recipe currentRecipe) {
+        final List<Recipe> recipes = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPE WHERE recipeID = ?");
+            st.setInt(1, currentRecipe.getRecipeID());
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                ArrayList<String> ingredientsList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM INGREDIENTS WHERE RECIPEID=?", "ingredient");
+                ArrayList<String> categoryList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM CATEGORIES WHERE RECIPEID=?", "category");
+                final Recipe recipe = createRecipe(rs, ingredientsList, categoryList);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
     private void insertSmallTable(Connection c, String tableName, int recipeID, ArrayList<String> theList) throws SQLException {
         for (int i = 0; i < theList.size(); i++) {
             PreparedStatement st2 = c.prepareStatement("INSERT INTO ? VALUES(?, ?)");
