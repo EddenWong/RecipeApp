@@ -5,70 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:scrollbars="vertical"
     tools:context="presentation.RecipeViewerActivity">
 
-    <TextView
-        android:id="@+id/recipeName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_name_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColorHint="#78909C" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/recipeSkillLevel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_skill_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/recipeDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_description_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_name_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="45dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:id="@+id/recipeIngredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_ingredients_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipeSkillLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_skill_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="45dp" />
 
-    <TextView
-        android:id="@+id/recipePrepTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_prep_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_description_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="75dp" />
 
-    <TextView
-        android:id="@+id/recipeCookTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_cook_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipeIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_ingredients_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="105dp" />
 
-    <TextView
-        android:id="@+id/recipeInstructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_instructions_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipePrepTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_prep_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="134dp" />
 
-    <TextView
-        android:id="@+id/recipeCategories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/recipe_categories_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHint="#78909C" />
+            <TextView
+                android:id="@+id/recipeCookTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_cook_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="164dp" />
+
+            <TextView
+                android:id="@+id/recipeInstructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_instructions_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="194dp" />
+
+            <TextView
+                android:id="@+id/recipeCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_categories_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColorHint="#78909C"
+                tools:layout_conversion_absoluteHeight="30dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="224dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
