@@ -62,6 +62,20 @@ public class Recipe {
     /* Recipe()
     Constructor to create an instance of recipe.
     */
+    public Recipe(final int newRecipeID) {
+        this.recipeID = newRecipeID;
+        this.name = null;
+        this.nationality = null;
+        this.ingredientList = null;
+        this.prepTime = 0;
+        this.cookTime = 0;
+        this.cookingSkillLevel = null;
+        this.description = null;
+        this.instructions = null;
+        this.link = null;
+        this.categoryList = null;
+    }
+
     public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
                   String instructions, String link, ArrayList<String> categoryList)
