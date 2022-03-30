@@ -5,16 +5,16 @@ import persistence.hsqldb.RecipePersistenceHSQLDB;
 
 public class Services
 {
-	private static RecipePersistence recipePersistence = null;
+    private static RecipePersistence recipePersistence = null;
 
-	public static synchronized RecipePersistence getRecipePersistence()
+    public static synchronized RecipePersistence getRecipePersistence()
     {
-		if (recipePersistence == null)
-		{
-		    //recipePersistence = new RecipePersistenceStub();
+        if (recipePersistence == null)
+        {
+            //recipePersistence = new RecipePersistenceStub();
             recipePersistence = new RecipePersistenceHSQLDB(Main.getDBPathName());
         }
 
         return recipePersistence;
-	}
+    }
 }

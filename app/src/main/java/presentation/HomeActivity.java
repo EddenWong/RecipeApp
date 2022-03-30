@@ -18,12 +18,13 @@ public class HomeActivity extends AppCompatActivity {
 
     public void buttonGroceryOnClick(View v)
     {
-        Intent studentsIntent = new Intent(HomeActivity.this, MainActivity.class);
-        HomeActivity.this.startActivity(studentsIntent);
+        Intent groceryIntent = new Intent(HomeActivity.this, MainActivity.class);
+        HomeActivity.this.startActivity(groceryIntent);
     }
 
-    public void buttonRecipeOnClick()
+    public void buttonRecipeOnClick(View v)
     {
-
+        Intent recipeIntent = new Intent(HomeActivity.this, RecipeListActivity.class);
+        HomeActivity.this.startActivity(recipeIntent);
     }
 }

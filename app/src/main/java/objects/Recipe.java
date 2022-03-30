@@ -1,4 +1,5 @@
 package objects;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -43,7 +44,7 @@ Future:
 Image of the recipe.
 */
 
-public class Recipe {
+public class Recipe implements Serializable {
     // Private member
     private int recipeID;
     private String name;
