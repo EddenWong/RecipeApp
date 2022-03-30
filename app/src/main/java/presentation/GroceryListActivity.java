@@ -108,7 +108,7 @@ public class GroceryListActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
-            case R.id.addItemButton:
+            case R.id.printItemButton:
                 addToList();
                 break;
         }
