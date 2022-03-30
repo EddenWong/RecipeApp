@@ -1,32 +1,33 @@
-package comp3350.srsys.tests.business;
+package tests.business;
 
-
-import org.junit.Before;
-import org.junit.Test;
-
-import comp3350.srsys.business.AccessStudents;
-
-import comp3350.srsys.objects.Student;
-
-import comp3350.srsys.tests.persistence.StudentPersistenceStub;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class AccessStudentsTest
+import org.junit.Before;
+import org.junit.Test;
+
+import application.Main;
+import business.AccessRecipes;
+import objects.Recipe;
+import persistence.hsqldb.RecipePersistenceHSQLDB;
+import tests.persistence.RecipePersistenceStub;
+
+public class AccessRecipesTest
 {
-	private AccessStudents accessStudents;
+	private AccessRecipes accessRecipes;
 
 	@Before
     public void setUp() {
-	    this.accessStudents = new AccessStudents(new StudentPersistenceStub());
+	    this.accessRecipes = new AccessRecipes(new RecipePersistenceStub());
+//		this.accessRecipes = new AccessRecipes(new RecipePersistenceHSQLDB(Main.getDBPathName()));
     }
 
     @Test
 	public void test1()
 	{
-		final Student student = accessStudents.getSequential();
-		assertNotNull(student);
-		assertTrue("100".equals(student.getStudentID()));
+		final Recipe recipe = accessRecipes.getSequential();
+		assertNotNull(recipe);
+		assertTrue(4 == (recipe.getRecipeID()));
 	}
 }
