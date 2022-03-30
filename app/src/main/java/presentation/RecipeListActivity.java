@@ -34,7 +34,7 @@ public class RecipeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
 
-        accessRecipes = new AccessRecipes(new RecipeTest());
+        accessRecipes = new AccessRecipes();
 
         try
         {

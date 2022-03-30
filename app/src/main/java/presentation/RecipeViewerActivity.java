@@ -3,6 +3,8 @@ package presentation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.print.PrintManager;
+import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.recipeapp.R;
@@ -41,6 +43,12 @@ public class RecipeViewerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recipe_menu, menu);
+        return true;
+    }
+
     private String formatIngredients(ArrayList ingredientList)
     {
         String listToReturn = "Ingredients:\n";
@@ -51,7 +59,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
         return listToReturn;
     }
-
 }
 
 

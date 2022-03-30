@@ -4,7 +4,7 @@ package application;
 
 public class Main
 {
-    private static String dbName="SC";
+    private static String dbName="src/main/assets/db/SC";
 
     public static void main(String[] args)
     {
