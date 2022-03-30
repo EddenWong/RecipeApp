@@ -21,8 +21,8 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
         if(getIntent().getExtras() != null) {
             Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+            getSupportActionBar().setTitle(recipe.getName());
 
-            TextView name = findViewById(R.id.recipeName);
             TextView skill = findViewById(R.id.recipeSkillLevel);
             TextView description = findViewById(R.id.recipeDescription);
             TextView ingredients = findViewById(R.id.recipeIngredients);
@@ -31,7 +31,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
             TextView instructions = findViewById(R.id.recipeInstructions);
             TextView categories = findViewById(R.id.recipeCategories);
 
-            name.setText(recipe.getName());
             skill.setText(recipe.getCookingSkillLevel());
             description.setText(recipe.getDescription() + "\n");
             ingredients.setText(formatIngredients(recipe.getIngredientList()));

@@ -21,7 +21,7 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import persistence.GroceryList;
 
-public class MainActivity extends AppCompatActivity {
+public class GroceryListActivity extends AppCompatActivity {
 
     ArrayList<String> groceryList = null;
     ListView groceryListView;
@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
         groceryList = new GroceryList().getArrayList();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_grocery_list);
         groceryListView = findViewById(R.id.groceryListView);
-        myArrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, groceryList);
+        myArrayAdapter = new ArrayAdapter(GroceryListActivity.this, android.R.layout.simple_list_item_1, groceryList);
         groceryListView.setAdapter(myArrayAdapter);
 
         groceryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                PopupMenu popUpMenu = new PopupMenu(MainActivity.this, view);
+                PopupMenu popUpMenu = new PopupMenu(GroceryListActivity.this, view);
                 popUpMenu.getMenuInflater().inflate(R.menu.pop_up_menu, popUpMenu.getMenu());
 
                 popUpMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.item_update:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_dialogue,null,false);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(GroceryListActivity.this);
+                                View v = LayoutInflater.from(GroceryListActivity.this).inflate(R.layout.item_dialogue,null,false);
                                 builder.setTitle("Update Item");
                                 EditText editText = v.findViewById(R.id.etItem);
                                 editText.setText(groceryList.get(position));
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (!editText.getText().toString().isEmpty()) {
                                             groceryList.set(position, editText.getText().toString().trim());
                                             myArrayAdapter.notifyDataSetChanged();
-                                            Toast.makeText(MainActivity.this, "Item Updated!", Toast.LENGTH_SHORT);
+                                            Toast.makeText(GroceryListActivity.this, "Item Updated!", Toast.LENGTH_SHORT);
                                         } else {
                                             editText.setError("Enter item");
                                         }
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                             case R.id.item_delete:
 
-                                Toast.makeText(MainActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GroceryListActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
                                 groceryList.remove(position);
                                 myArrayAdapter.notifyDataSetChanged();
                                 break;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.grocery_menu, menu);
         return true;
     }
 
@@ -117,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addToList() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GroceryListActivity.this);
         builder.setTitle("Add Item");
 
-        View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_dialogue, null, false);
+        View v = LayoutInflater.from(GroceryListActivity.this).inflate(R.layout.item_dialogue, null, false);
 
         builder.setView(v);
         final EditText etItem = v.findViewById(R.id.etItem);

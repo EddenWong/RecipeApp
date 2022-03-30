@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void buttonGroceryOnClick(View v)
     {
-        Intent groceryIntent = new Intent(HomeActivity.this, MainActivity.class);
+        Intent groceryIntent = new Intent(HomeActivity.this, GroceryListActivity.class);
         HomeActivity.this.startActivity(groceryIntent);
     }
 
