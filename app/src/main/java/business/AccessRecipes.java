@@ -52,4 +52,17 @@ public class AccessRecipes {
         return recipe;
     }
 
+    public Recipe insertRecipe(Recipe currentRecipe)
+    {
+        return recipePersistence.insertRecipe(currentRecipe);
+    }
+
+    public Recipe updateRecipe(Recipe currentRecipe)
+    {
+        return recipePersistence.updateRecipe(currentRecipe);
+    }
+
+    public void deleteRecipe(Recipe currentRecipe) {
+        recipePersistence.deleteRecipe(currentRecipe);
+    }
 }
