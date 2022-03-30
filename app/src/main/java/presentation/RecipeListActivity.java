@@ -75,7 +75,7 @@ public class RecipeListActivity extends AppCompatActivity {
         }
         catch (final Exception e)
         {
-            //  Messages.fatalError(this, e.getMessage());
+            //Messages.fatalError(this, e.getMessage());
         }
     }
 }
@@ -86,13 +86,15 @@ class RecipePersistenceStub implements RecipePersistence {
 
     public RecipePersistenceStub() {
         this.recipes =new ArrayList<>();
-        ArrayList<String> ingredientList = new ArrayList<String>();
+        ArrayList<String> ingredientList = new ArrayList<>();
         ingredientList.add("1 tps of sugar");
         ingredientList.add("1 tps of salt");
         ingredientList.add("1 tps of flour");
         ingredientList.add("1 tbps of butter");
 
-        ArrayList<String> categoryList = new ArrayList<String>();
+        ArrayList<String> categoryList = new ArrayList<>();
+        categoryList.add("Vegetarian");
+
         ingredientList.add("Dessert");
 
         recipes.add(new Recipe(4, "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too easy", "Mix everything together. Eat it.", "MEME", categoryList));

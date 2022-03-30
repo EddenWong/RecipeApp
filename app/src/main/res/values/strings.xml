@@ -2,5 +2,13 @@
     <string name="app_name">Recipe App</string>
     <string name="grocery_button">Grocery List</string>
     <string name="recipe_button">Recipe List</string>
-    <string name="default_text">Default</string>
+    <string name="recipe_name_hint">Recipe Name</string>
+    <string name="recipe_skill_hint">Recipe Skill Level</string>
+    <string name="recipe_description_hint">Recipe Description</string>
+    <string name="recipe_ingredients_hint">Recipe Ingredients</string>
+    <string name="recipe_prep_hint">Recipe Prep Time</string>
+    <string name="recipe_cook_hint">Recipe Cook Time</string>
+    <string name="recipe_instructions_hint">Recipe Instructions</string>
+    <string name="recipe_categories_hint">Recipe Categories</string>
+
 </resources>
