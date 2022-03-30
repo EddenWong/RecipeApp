@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.example.recipeapp.R;
 
+import java.util.ArrayList;
+
 import objects.Recipe;
 
 
@@ -32,7 +34,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
             name.setText(recipe.getName());
             skill.setText(recipe.getCookingSkillLevel());
             description.setText(recipe.getDescription() + "\n");
-            ingredients.setText("Ingredients:\n" + recipe.getIngredientList().toString() + "\n");
+            ingredients.setText(formatIngredients(recipe.getIngredientList()));
             prepTime.setText("Preparation time: " + recipe.getPrepTime() + " minutes");
             cookTime.setText("Cooking time: " + recipe.getCookTime() + " minutes");
             instructions.setText("Instructions:\n" + recipe.getInstructions() + "\n");
@@ -40,6 +42,16 @@ public class RecipeViewerActivity extends AppCompatActivity {
         }
     }
 
+    private String formatIngredients(ArrayList ingredientList)
+    {
+        String listToReturn = "Ingredients:\n";
+
+        for(int i = 0; i < ingredientList.size(); i++) {
+            listToReturn += ingredientList.get(i).toString() + "\n";
+        }
+
+        return listToReturn;
+    }
 
 }
 

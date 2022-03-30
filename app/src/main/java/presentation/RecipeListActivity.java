@@ -28,14 +28,13 @@ public class RecipeListActivity extends AppCompatActivity {
     private AccessRecipes accessRecipes;
     private List<Recipe> recipeList;
     private ArrayAdapter<Recipe> recipeArrayAdapter;
-    private int selectedRecipePosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
 
-        accessRecipes = new AccessRecipes(new RecipePersistenceStub());
+        accessRecipes = new AccessRecipes();
 
         try
         {
@@ -81,10 +80,10 @@ public class RecipeListActivity extends AppCompatActivity {
 }
 
 
-class RecipePersistenceStub implements RecipePersistence {
+class RecipeTest implements RecipePersistence {
     private List<Recipe> recipes;
 
-    public RecipePersistenceStub() {
+    public RecipeTest() {
         this.recipes =new ArrayList<>();
         ArrayList<String> ingredientList = new ArrayList<>();
         ingredientList.add("1 tps of sugar");
