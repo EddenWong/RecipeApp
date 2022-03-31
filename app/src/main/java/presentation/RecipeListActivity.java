@@ -9,8 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -29,12 +32,13 @@ public class RecipeListActivity extends AppCompatActivity {
     private List<Recipe> recipeList;
     private List<String> recipeNames;
     private ArrayAdapter<Recipe> recipeArrayAdapter;
+    private int previousButtonId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
-
+        previousButtonId = -1;
         accessRecipes = new AccessRecipes();
 
         try
@@ -84,6 +88,7 @@ public class RecipeListActivity extends AppCompatActivity {
         {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -97,16 +102,26 @@ public class RecipeListActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void buttonAppetizerOnClick(View v)
+    public void buttonFilterOnClick(View v)
     {
-        categoryFilters("Appetizer");
-    }
+        RadioButton button = (RadioButton) findViewById(v.getId());
+        String name = (String) button.getText();
 
-    public void buttonDessertOnClick(View v)
-    {
-        categoryFilters("Dessert");
-    }
+        if(previousButtonId != v.getId())
+        {
+            categoryFilters(name);
+            previousButtonId = v.getId();
+        }
+        else
+        {
+            System.out.println(previousButtonId);
 
+            resetFilter();
+            RadioGroup buttons = findViewById(R.id.category_radio_group);
+            buttons.clearCheck();
+            previousButtonId = -1;
+        }
+    }
 
     private void categoryFilters(String filter)
     {
@@ -121,6 +136,13 @@ public class RecipeListActivity extends AppCompatActivity {
         }
 
         recipeArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, newRecipeList);
+        final ListView listView = findViewById(R.id.listRecipes);
+        listView.setAdapter(recipeArrayAdapter);
+    }
+
+    private void resetFilter()
+    {
+        recipeArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList);
         final ListView listView = findViewById(R.id.listRecipes);
         listView.setAdapter(recipeArrayAdapter);
 

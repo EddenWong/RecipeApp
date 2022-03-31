@@ -21,10 +21,12 @@
     <string name="recipe_categories">Categories</string>
 
     <string name="recipe_bookmarked">Bookmarked</string>
-    <string name="recipe_appetizer">Appetizers</string>
+    <string name="recipe_appetizer">Appetizer</string>
     <string name="recipe_bread">Bread Recipes</string>
     <string name="recipe_breakfast">Breakfast and Brunch</string>
-    <string name="recipe_dessert">Desserts</string>
+    <string name="recipe_dessert">Dessert</string>
+    <string name="recipe_entree">Entree</string>
+    <string name="recipe_soup">Soup</string>
 
 
 
