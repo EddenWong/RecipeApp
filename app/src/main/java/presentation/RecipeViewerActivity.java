@@ -19,18 +19,24 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import business.AccessRecipes;
 import objects.Recipe;
 
 
 public class RecipeViewerActivity extends AppCompatActivity {
 
     private Recipe myRecipe;
+    private WebView mWebView;
+    private AccessRecipes accessRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_viewer);
 
+        accessRecipes = new AccessRecipes();
+
+        //Get information on recipe
         if(getIntent().getExtras() != null) {
             myRecipe = (Recipe) getIntent().getSerializableExtra("recipe");
             Objects.requireNonNull(getSupportActionBar()).setTitle(myRecipe.getName());
@@ -51,15 +57,16 @@ public class RecipeViewerActivity extends AppCompatActivity {
             instructions.setText(formatInstructions(myRecipe.getInstructions()));
             categories.setText(myRecipe.getCategoryList().toString());
         }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.recipe_menu, menu);
+        getMenuInflater().inflate(R.menu.recipe_pop_up_menu, menu);
         return true;
     }
 
-    private String formatIngredients(ArrayList ingredientList)
+    private String formatIngredients(ArrayList<String> ingredientList)
     {
         String formattedIngredients = "No ingredients found";
 
@@ -93,15 +100,16 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
-            case R.id.printItemButton:
+            case R.id.recipePrint:
                 doPrint();
                 break;
-
+            case R.id.recipeBookmark:
+                bookmark();
+                break;
         }
 
         return true;
     }
-    private WebView mWebView;
 
     private void doPrint() {
         // Create a WebView object specifically for printing
@@ -182,6 +190,49 @@ public class RecipeViewerActivity extends AppCompatActivity {
         HTMLConverted += "<p>" + myRecipe.getCategoryList() + "</p>";
 
         return HTMLConverted + "</body></html>";
+    }
+
+    private void bookmark()
+    {
+        //If it's not bookmarked, do it
+        //If it is bookmarked, undo it
+        //Construct new recipe and update the old one
+        Recipe newRecipe;
+        int oldId = myRecipe.getRecipeID();
+        String oldName = myRecipe.getName();
+        String oldNationality = myRecipe.getNationality();
+        ArrayList<String> oldIngredients = myRecipe.getIngredientList();
+        int oldPrep = myRecipe.getPrepTime();
+        int oldCook = myRecipe.getCookTime();
+        String oldSkill = myRecipe.getCookingSkillLevel();
+        String oldDesc = myRecipe.getDescription();
+        String oldInstruc = myRecipe.getInstructions();
+        String oldLink = myRecipe.getLink();
+        ArrayList<String> oldCategories = myRecipe.getCategoryList();
+
+        if(oldCategories == null)
+        {
+            oldCategories = new ArrayList<>();
+        }
+
+        if(!myRecipe.getCategoryList().contains("Bookmarked")) {
+            //Add bookmarked as category
+            oldCategories.add("Bookmarked");
+            newRecipe = new Recipe(oldId, oldName, oldNationality, oldIngredients, oldPrep, oldCook, oldSkill, oldDesc, oldInstruc, oldLink, oldCategories);
+        }
+        else
+        {
+            oldCategories.remove("Bookmarked");
+            newRecipe = new Recipe(oldId, oldName, oldNationality, oldIngredients, oldPrep, oldCook, oldSkill, oldDesc, oldInstruc, oldLink, oldCategories);
+
+        }
+        //Update old recipe
+        accessRecipes.updateRecipe(newRecipe);
+
+        //Replace old category
+        TextView categories = findViewById(R.id.recipeCategories);
+        categories.setText(myRecipe.getCategoryList().toString());
+
     }
 }
 

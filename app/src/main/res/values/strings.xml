@@ -28,6 +28,9 @@
     <string name="recipe_entree">Entree</string>
     <string name="recipe_soup">Soup</string>
 
+    <string name="recipe_bookmark_button">Bookmark</string>
+    <string name="recipe_print_button">Print</string>
+
 
 
 </resources>
