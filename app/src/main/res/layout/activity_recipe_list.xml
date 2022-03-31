@@ -1,8 +1,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="presentation.RecipeViewerActivity">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@android:style/Widget.Button.Inset"
+                android:layout_width="@dimen/category_button"
+                android:layout_height="@dimen/category_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingStart="-1dp"
+                android:paddingEnd="-1dp"
+                android:text="@string/recipe_bookmarked"
+                android:layout_gravity="fill_vertical"
+                android:textColor="#FFF"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <Button
+                style="@android:style/Widget.Button.Inset"
+                android:layout_width="@dimen/category_button"
+                android:layout_height="@dimen/category_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/recipe_appetizer"
+                android:layout_gravity="fill_vertical"
+                android:textColor="#FFF"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <Button
+                style="@android:style/Widget.Button.Inset"
+                android:layout_width="@dimen/category_button"
+                android:layout_height="@dimen/category_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/recipe_bread"
+                android:layout_gravity="fill_vertical"
+                android:textColor="#FFF"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <Button
+                style="@android:style/Widget.Button.Inset"
+                android:layout_width="@dimen/category_button"
+                android:layout_height="@dimen/category_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/recipe_breakfast"
+                android:layout_gravity="fill_vertical"
+                android:textColor="#FFF"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+
+            <Button
+                style="@android:style/Widget.Button.Inset"
+                android:layout_width="@dimen/category_button"
+                android:layout_height="@dimen/category_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingStart="-1dp"
+                android:paddingEnd="-1dp"
+                android:text="@string/recipe_dessert"
+                android:layout_gravity="fill_vertical"
+                android:textColor="#FFF"
+                android:layout_weight="1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
 
     <ListView
         android:id="@+id/listRecipes"
@@ -10,6 +98,8 @@
         android:layout_height="0dp"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice" >
+
+    </ListView>
 
 </LinearLayout>

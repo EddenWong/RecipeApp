@@ -90,6 +90,13 @@ public class RecipeListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.recipe_list_menu, menu);
 
+        searchBar(menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void searchBar(Menu menu)
+    {
         // Initialise search bar
         MenuItem searchViewItem = menu.findItem(R.id.search_bar);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
@@ -121,7 +128,6 @@ public class RecipeListActivity extends AppCompatActivity {
                     }
                 });
 
-        return super.onCreateOptionsMenu(menu);
     }
 
 }
