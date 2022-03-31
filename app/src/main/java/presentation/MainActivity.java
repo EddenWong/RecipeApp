@@ -21,11 +21,12 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import persistence.GroceryList;
 
-public class MainActivity extends AppCompatActivity {
-
-    ArrayList<String> groceryList = null;
-    ListView groceryListView;
-    ArrayAdapter myArrayAdapter;
+public class MainActivity extends AppCompatActivity
+{
+    // Private member
+    private ArrayList<String> groceryList = null;
+    private ListView groceryListView;
+    private ArrayAdapter myArrayAdapter;
 
 
     @Override
