@@ -1,4 +1,6 @@
 package objects;
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -160,4 +162,8 @@ public class Recipe implements Serializable {
     {
         return name;
     }
+
+
 }
+
+

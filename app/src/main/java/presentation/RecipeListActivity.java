@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
@@ -49,6 +50,7 @@ public class RecipeListActivity extends AppCompatActivity {
 
             System.out.println(recipeNames);
 
+            //Make an arrayadapter wrapper
             recipeArrayAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList)
             {
               /* @Override
@@ -93,6 +95,35 @@ public class RecipeListActivity extends AppCompatActivity {
         searchBar(menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void buttonAppetizerOnClick(View v)
+    {
+        categoryFilters("Appetizer");
+    }
+
+    public void buttonDessertOnClick(View v)
+    {
+        categoryFilters("Dessert");
+    }
+
+
+    private void categoryFilters(String filter)
+    {
+        List<Recipe> newRecipeList = new ArrayList<>();
+
+        for(int i = 0; i < recipeList.size(); i++)
+        {
+            if(recipeList.get(i).getCategoryList().contains(filter))
+            {
+                newRecipeList.add(recipeList.get(i));
+            }
+        }
+
+        recipeArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, newRecipeList);
+        final ListView listView = findViewById(R.id.listRecipes);
+        listView.setAdapter(recipeArrayAdapter);
+
     }
 
     private void searchBar(Menu menu)

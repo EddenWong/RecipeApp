@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="presentation.RecipeViewerActivity">
+    tools:context="presentation.RecipeListActivity">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -34,14 +34,15 @@
                 style="@android:style/Widget.Button.Inset"
                 android:layout_width="@dimen/category_button"
                 android:layout_height="@dimen/category_button"
+                android:layout_gravity="fill_vertical"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/recipe_appetizer"
-                android:layout_gravity="fill_vertical"
-                android:textColor="#FFF"
                 android:layout_weight="1"
+                android:onClick="buttonAppetizerOnClick"
+                android:text="@string/recipe_appetizer"
+                android:textColor="#FFF"
                 android:textSize="14sp" />
 
             <Button
@@ -83,6 +84,7 @@
                 android:paddingStart="-1dp"
                 android:paddingEnd="-1dp"
                 android:text="@string/recipe_dessert"
+                android:onClick="buttonDessertOnClick"
                 android:layout_gravity="fill_vertical"
                 android:textColor="#FFF"
                 android:layout_weight="1"
