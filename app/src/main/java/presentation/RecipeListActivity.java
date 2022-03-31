@@ -49,7 +49,7 @@ public class RecipeListActivity extends AppCompatActivity {
                     TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                     TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                    text1.setText(String.valueOf(recipeList.get(position).getName()));
+                    text1.setText(recipeList.get(position).getName());
                     text2.setText(recipeList.get(position).getCookingSkillLevel());
 
                     return view;
@@ -74,7 +74,8 @@ public class RecipeListActivity extends AppCompatActivity {
         }
         catch (final Exception e)
         {
-            //Messages.fatalError(this, e.getMessage());
+//            Messages.fatalError(this, e.getMessage());
+            e.printStackTrace();
         }
     }
 }
