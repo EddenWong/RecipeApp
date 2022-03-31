@@ -1,26 +1,80 @@
 package persistence.hsqldb;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import objects.GroceryList;
 import persistence.GroceryListInterface;
 
 public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
+   
+    private final String dbPath;
+
+    public GroceryListPersistenceHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
+    }
+
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    }
 
     @Override
     public GroceryList getGroceryList() {
         return null;
     }
 
+
     @Override
     public String insertItem(String newItem) {
-        return null;
+        
+        try (final Connection c = connection()) {
+            PreparedStatement st = c.prepareStatement("INSERT INTO GroceryList VALUES(?)");
+            st.setInt(1, newItem);
+            st.executeUpdate();
+            st.close();
+
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }      
+        
+        return newItem;
     }
 
     @Override
     public String updateItem(String currentItem) {
-        return null;
+       
+        try (final Connection c = connection()) {
+            PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET ? WHERE ?");
+            st.setInt(1, currentItem);
+            st.setInt(2, currentItem);
+            st.executeUpdate();
+            st.close();
+
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+       
+        return currentItem;
     }
 
     @Override
     public void deleteItem(String currentItem) {
+          try (final Connection c = connection()) {
+            PreparedStatement st = c.prepareStatement("DELETE FROM GroceryList WHERE ?");
+            st.setInt(1, currentItem);
+            st.executeUpdate();
+            st.close();
+
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+
     }
 }
