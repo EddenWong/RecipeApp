@@ -155,4 +155,9 @@ public class Recipe implements Serializable {
     The list of filters for the recipe.
     */
     public ArrayList<String> getCategoryList() { return this.categoryList; }
+
+    public String toString()
+    {
+        return name;
+    }
 }

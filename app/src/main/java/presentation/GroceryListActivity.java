@@ -27,7 +27,6 @@ public class GroceryListActivity extends AppCompatActivity {
     ListView groceryListView;
     ArrayAdapter myArrayAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Create a grocery list and give GUI the array list
@@ -43,7 +42,7 @@ public class GroceryListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 PopupMenu popUpMenu = new PopupMenu(GroceryListActivity.this, view);
-                popUpMenu.getMenuInflater().inflate(R.menu.pop_up_menu, popUpMenu.getMenu());
+                popUpMenu.getMenuInflater().inflate(R.menu.grocery_pop_up_menu, popUpMenu.getMenu());
 
                 popUpMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

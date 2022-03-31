@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.recipeapp.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import objects.Recipe;
 
@@ -32,7 +33,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
         if(getIntent().getExtras() != null) {
             myRecipe = (Recipe) getIntent().getSerializableExtra("recipe");
-            getSupportActionBar().setTitle(myRecipe.getName());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(myRecipe.getName());
 
             TextView skill = findViewById(R.id.recipeSkillLevel);
             TextView description = findViewById(R.id.recipeDescription);
@@ -43,11 +44,11 @@ public class RecipeViewerActivity extends AppCompatActivity {
             TextView categories = findViewById(R.id.recipeCategories);
 
             skill.setText(myRecipe.getCookingSkillLevel());
-            description.setText(myRecipe.getDescription() + "\n");
+            description.setText(myRecipe.getDescription());
             ingredients.setText(formatIngredients(myRecipe.getIngredientList()));
-            prepTime.setText("Preparation time: " + myRecipe.getPrepTime() + " minutes");
-            cookTime.setText("Cooking time: " + myRecipe.getCookTime() + " minutes");
-            instructions.setText("Instructions:\n" + myRecipe.getInstructions() + "\n");
+            prepTime.setText(myRecipe.getPrepTime() + " minutes");
+            cookTime.setText(myRecipe.getCookTime() + " minutes");
+            instructions.setText(formatInstructions(myRecipe.getInstructions()));
             categories.setText(myRecipe.getCategoryList().toString());
         }
     }
@@ -60,13 +61,32 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
     private String formatIngredients(ArrayList ingredientList)
     {
-        String listToReturn = "Ingredients:\n";
+        String formattedIngredients = "No ingredients found";
 
-        for(int i = 0; i < ingredientList.size(); i++) {
-            listToReturn += ingredientList.get(i).toString() + "\n";
+        if(ingredientList != null) {
+            formattedIngredients = "";
+            for (int i = 0; i < ingredientList.size(); i++) {
+                formattedIngredients += ingredientList.get(i).toString();
+
+                if (i < ingredientList.size() - 1) {
+                    formattedIngredients += "\n";
+                }
+            }
         }
 
-        return listToReturn;
+        return formattedIngredients;
+    }
+
+    private String formatInstructions(String instructions)
+    {
+        String formattedInstructions = "No instructions found";
+
+        if(instructions != null)
+        {
+            formattedInstructions = instructions.replace("$","\n\n");
+        }
+
+        return formattedInstructions;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,6 +96,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
             case R.id.printItemButton:
                 doPrint();
                 break;
+
         }
 
         return true;
@@ -99,7 +120,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
             }
         });
 
-        // Generate an HTML document on the fly:
+        // Convert the recipe into a formatted html string:
         String htmlDocument = convertToHTML();
         webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
 
@@ -124,8 +145,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
         PrintJob printJob = printManager.print(jobName, printAdapter,
                 new PrintAttributes.Builder().build());
 
-        // Save the job object for later status checking
-        //printJobs.add(printJob);
     }
 
     private String convertToHTML()
@@ -133,6 +152,10 @@ public class RecipeViewerActivity extends AppCompatActivity {
         String HTMLConverted = "<html><body>";
         //Get Title
         HTMLConverted += "<h1>" + myRecipe.getName() + "</h1>";
+
+        //Get skill level
+        HTMLConverted += "<h2>Skill Level</h2>";
+        HTMLConverted += "<p>" + myRecipe.getCookingSkillLevel() + "</p>";
 
         //Get description
         HTMLConverted += "<h2>Description</h2>";
@@ -152,7 +175,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
         //Get instructions
         HTMLConverted += "<h2>Instructions</h2>";
-        HTMLConverted += "<p>" + myRecipe.getInstructions() + "minutes</p>";
+        HTMLConverted += "<p>" + formatInstructions(myRecipe.getInstructions()) + "minutes</p>";
 
         //Get categories
         HTMLConverted += "<h2>Categories</h2>";
