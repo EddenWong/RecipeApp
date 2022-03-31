@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recipeapp.R;
@@ -90,17 +87,14 @@ public class RecipeListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate menu with items using MenuInflator
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.recipe_list_menu, menu);
 
-        // Initialise menu item search bar
-        // with id and take its object
+        // Initialise search bar
         MenuItem searchViewItem = menu.findItem(R.id.search_bar);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
 
-        // attach setOnQueryTextListener
-        // to search view defined above
+        // attach setOnQueryTextListener to search view
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
 
