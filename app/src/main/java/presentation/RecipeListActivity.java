@@ -2,7 +2,6 @@ package presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,7 @@ public class RecipeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
 
-        accessRecipes = new AccessRecipes();
+        accessRecipes = new AccessRecipes(new RecipeTest());
 
         try
         {
@@ -59,16 +58,13 @@ public class RecipeListActivity extends AppCompatActivity {
             final ListView listView = (ListView)findViewById(R.id.listRecipes);
             listView.setAdapter(recipeArrayAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    Recipe item = (Recipe)adapterView.getItemAtPosition(position);
+            listView.setOnItemClickListener((adapterView, view, position, l) -> {
+                Recipe item = (Recipe)adapterView.getItemAtPosition(position);
 
-                    Intent recipeIntent = new Intent(RecipeListActivity.this,RecipeViewerActivity.class);
-                    recipeIntent.putExtra("recipe",item);
-                    startActivity(recipeIntent);
+                Intent recipeIntent = new Intent(RecipeListActivity.this,RecipeViewerActivity.class);
+                recipeIntent.putExtra("recipe",item);
+                startActivity(recipeIntent);
 
-                }
             });
 
         }
@@ -81,8 +77,9 @@ public class RecipeListActivity extends AppCompatActivity {
 }
 
 
+
 class RecipeTest implements RecipePersistence {
-    private List<Recipe> recipes;
+    private final List<Recipe> recipes;
 
     public RecipeTest() {
         this.recipes =new ArrayList<>();
@@ -97,7 +94,7 @@ class RecipeTest implements RecipePersistence {
 
         ingredientList.add("Dessert");
 
-        recipes.add(new Recipe(4, "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too dawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejh vkjdh kdh kjfc kjh kjahwd jofi jfvjqpoi hu u uo  KDH KJH KDH KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy", "Mix everything together. Eat it.", "MEME", categoryList));
+        recipes.add(new Recipe(4, "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too dawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc ndawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejhdawhkdhwakjwahdwiakjdhwaiwandwcunydiudyn dhiwaudan dhdwiud hdi dkjhg egfh kjh v ghb nv dvbn whftc n fhkejh fhkejh vkjdh kdh kjfc kjh kjahwd jofi jfvjqpoi hu u uo  KDH KJH KDH KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy KAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easyKAJH kj hkdjh kjwahd  jdh kjwdh .,  dhwhdn kj  d 79aw  2 dh2817y edh3 2976 4easy", "Mix everything together. Eat it.", "MEME", categoryList));
         recipes.add(new Recipe(5, "Difficult cake", "US", ingredientList, 5, 20, "Hard", "Too hard", "Mix everything together. Don't eat it.", "LMAO", categoryList));
         recipes.add(new Recipe(6, "Difficult cake", "US", ingredientList, 5, 20, "Hard", "Too hard", "Mix everything together. Don't eat it.", "LMAO", categoryList));
         recipes.add(new Recipe(7, "Difficult cake", "US", ingredientList, 5, 20, "Hard", "Too hard", "Mix everything together. Don't eat it.", "LMAO", categoryList));
