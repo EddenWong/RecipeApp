@@ -26,7 +26,24 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
 
     @Override
     public GroceryList getGroceryList() {
-        return null;
+       
+       ArrayList<String> groceryItems = new ArrayList<String>();
+       try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM GroceryList");
+           
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+       
+            groceryItems.add(rs.getString(1)); //place rows in the list till availables (1)
+            }
+            rs.close();
+            st.close();
+
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }      
+       
+        return groceryItems;
     }
 
 
@@ -50,7 +67,7 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
     public String updateItem(String currentItem) {
        
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET ? WHERE ?");
+            PreparedStatement st = c.prepareStatement("UPDATE GroceryList SET item = ? WHERE item = ?");
             st.setInt(1, currentItem);
             st.setInt(2, currentItem);
             st.executeUpdate();
@@ -66,7 +83,7 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
     @Override
     public void deleteItem(String currentItem) {
           try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("DELETE FROM GroceryList WHERE ?");
+            PreparedStatement st = c.prepareStatement("DELETE FROM GroceryList WHERE item = ?");
             st.setInt(1, currentItem);
             st.executeUpdate();
             st.close();
