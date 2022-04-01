@@ -7,11 +7,11 @@ import objects.GroceryList;
 
 public interface GroceryListPersistence {
 
-    GroceryList getGroceryList();
+    ArrayList<String> getGroceryList();
 
     String insertItem(String currentItem);
 
-    String updateItem(String currentItem);
+    String updateItem(String currentItem, String newItem);
 
     void deleteItem(String currentItem);
 }
