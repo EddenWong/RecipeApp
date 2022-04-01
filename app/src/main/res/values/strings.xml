@@ -20,5 +20,17 @@
     <string name="recipe_instructions">Instructions</string>
     <string name="recipe_categories">Categories</string>
 
+    <string name="recipe_bookmarked">Bookmarked</string>
+    <string name="recipe_appetizer">Appetizer</string>
+    <string name="recipe_bread">Bread Recipes</string>
+    <string name="recipe_breakfast">Breakfast and Brunch</string>
+    <string name="recipe_dessert">Dessert</string>
+    <string name="recipe_entree">Entree</string>
+    <string name="recipe_soup">Soup</string>
+
+    <string name="recipe_bookmark_button">Bookmark</string>
+    <string name="recipe_print_button">Print</string>
+
+
 
 </resources>
