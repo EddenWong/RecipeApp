@@ -5,13 +5,13 @@ import java.util.List;
 
 import objects.GroceryList;
 
-public interface GroceryListInterface {
+public interface GroceryListPersistence {
 
-    GroceryList getGroceryList();
+    ArrayList<String> getGroceryList();
 
     String insertItem(String currentItem);
 
-    String updateItem(String currentItem);
+    String updateItem(String currentItem, String newItem);
 
     void deleteItem(String currentItem);
 }
