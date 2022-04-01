@@ -5,7 +5,7 @@ import java.util.List;
 
 import objects.GroceryList;
 
-public interface GroceryListInterface {
+public interface GroceryListPersistence {
 
     GroceryList getGroceryList();
 

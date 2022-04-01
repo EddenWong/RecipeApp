@@ -5,14 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import objects.GroceryList;
-import persistence.GroceryListInterface;
+import persistence.GroceryListPersistence;
 
-public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
+public class GroceryListPersistenceHSQLDB implements GroceryListPersistence {
    
     private final String dbPath;
 
