@@ -9,6 +9,11 @@ public class GroceryList {
         groceryList = new ArrayList<String>();
     }
 
+    public GroceryList(ArrayList<String> currentItemList)
+    {
+        groceryList = currentItemList;
+    }
+
     public ArrayList<String> getGroceryList() {
         return this.groceryList;
     }

@@ -1,5 +1,6 @@
 package persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import objects.GroceryList;
@@ -7,8 +8,6 @@ import objects.GroceryList;
 public interface GroceryListInterface {
 
     GroceryList getGroceryList();
-
-    GroceryList getGroceryList(ArrayList<String> currentItemList);
 
     String insertItem(String currentItem);
 
