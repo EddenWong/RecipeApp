@@ -8,6 +8,8 @@ public interface GroceryListInterface {
 
     GroceryList getGroceryList();
 
+    GroceryList getGroceryList(ArrayList<String> currentItemList);
+
     String insertItem(String currentItem);
 
     String updateItem(String currentItem);
