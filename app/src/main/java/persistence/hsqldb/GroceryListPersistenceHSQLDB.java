@@ -12,6 +12,9 @@ import java.util.List;
 import objects.GroceryList;
 import persistence.GroceryListInterface;
 
+//declarations
+ArrayList<String> groceryListReturn = new ArrayList<String>();
+
 public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
    
     private final String dbPath;
@@ -24,25 +27,37 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
+  
+    @Override
+    public GroceryList getGroceryList(ArrayList<String> currentItemList) {
+
+         this.groceryListReturn = currentItemList;
+
+    }
+
     @Override
     public GroceryList getGroceryList() {
        
+       GroceryList listReturn = null;
        ArrayList<String> groceryItems = new ArrayList<String>();
        try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM GroceryList");
            
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
-       
-            groceryItems.add(rs.getString(1)); //place rows in the list till availables (1)
+            
+              groceryItems.add(rs.getString(1)); //place rows in the list till availables (1)
             }
+
             rs.close();
             st.close();
 
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }      
-       
+
+        listReturn=getGroceryList(groceryItems);//create an object with the arraylist of groceryItems
+
         return groceryItems;
     }
 
