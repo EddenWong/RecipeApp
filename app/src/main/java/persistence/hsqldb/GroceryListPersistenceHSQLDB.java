@@ -5,14 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import objects.GroceryList;
-import persistence.GroceryListInterface;
+import persistence.GroceryListPersistence;
 
-public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
+public class GroceryListPersistenceHSQLDB implements GroceryListPersistence {
    
     private final String dbPath;
 
@@ -26,7 +24,7 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
 
 
     @Override
-    public GroceryList getGroceryList() {
+    public ArrayList<String> getGroceryList() {
        ArrayList<String> groceryItems = new ArrayList<String>();
        try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM GroceryList");
@@ -38,8 +36,8 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
             rs.close();
             st.close();
 
-            GroceryList newGroceryList = new GroceryList(groceryItems);
-            return newGroceryList;
+//            GroceryList newGroceryList = new GroceryList(groceryItems);
+            return groceryItems;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
@@ -48,26 +46,31 @@ public class GroceryListPersistenceHSQLDB implements GroceryListInterface {
 
     @Override
     public String insertItem(String newItem) {
-        
+        String result = newItem;
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO GroceryList VALUES(?)");
-            st.setString(1, newItem);
-            st.executeUpdate();
-            st.close();
+            ArrayList<String> items = getGroceryList();
+            if (items.contains(newItem)) {
+                result = "Note: " + newItem + " already exists in Grocery List";
+            }
+            else {
+                PreparedStatement st = c.prepareStatement("INSERT INTO GroceryList VALUES(?)");
+                st.setString(1, newItem);
+                st.executeUpdate();
+                st.close();
+            }
 
         } catch (final SQLException e) {
             throw new PersistenceException(e);
-        }      
-        
-        return newItem;
+        }
+        return result;
     }
 
     @Override
-    public String updateItem(String currentItem) {
+    public String updateItem(String currentItem, String newItem) {
        
         try (final Connection c = connection()) {
             PreparedStatement st = c.prepareStatement("UPDATE GroceryList SET item = ? WHERE item = ?");
-            st.setString(1, currentItem);
+            st.setString(1, newItem);
             st.setString(2, currentItem);
             st.executeUpdate();
             st.close();
