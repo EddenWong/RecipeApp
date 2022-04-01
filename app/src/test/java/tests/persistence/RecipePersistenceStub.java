@@ -30,6 +30,13 @@ public class RecipePersistenceStub implements RecipePersistence {
         return Collections.unmodifiableList(recipes);
     }
 
+    @Override
+    public List<Recipe> getRecipe(Recipe currentRecipe) {
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(currentRecipe);
+        return Collections.unmodifiableList(recipes);
+    }
+
     public Recipe insertRecipe(Recipe currentRecipe) {
         recipes.add(currentRecipe);
         return currentRecipe;

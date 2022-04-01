@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/recipeBookmark"
+        android:title="@string/recipe_bookmark_button" />
+    <item
+        android:id="@+id/recipePrint"
+        android:title="@string/recipe_print_button" />
+</menu>

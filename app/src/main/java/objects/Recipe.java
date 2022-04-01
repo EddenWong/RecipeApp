@@ -1,4 +1,7 @@
 package objects;
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -43,7 +46,7 @@ Future:
 Image of the recipe.
 */
 
-public class Recipe {
+public class Recipe implements Serializable {
     // Private member
     private int recipeID;
     private String name;
@@ -62,6 +65,20 @@ public class Recipe {
     /* Recipe()
     Constructor to create an instance of recipe.
     */
+    public Recipe(final int newRecipeID) {
+        this.recipeID = newRecipeID;
+        this.name = null;
+        this.nationality = null;
+        this.ingredientList = null;
+        this.prepTime = 0;
+        this.cookTime = 0;
+        this.cookingSkillLevel = null;
+        this.description = null;
+        this.instructions = null;
+        this.link = null;
+        this.categoryList = null;
+    }
+
     public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
                   String instructions, String link, ArrayList<String> categoryList)
@@ -140,4 +157,13 @@ public class Recipe {
     The list of filters for the recipe.
     */
     public ArrayList<String> getCategoryList() { return this.categoryList; }
+
+    public String toString()
+    {
+        return name;
+    }
+
+
 }
+
+
