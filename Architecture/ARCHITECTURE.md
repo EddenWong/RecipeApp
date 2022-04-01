@@ -40,9 +40,9 @@ RecipePresistence.java is the interface for the recipe class.
 
 GroceryListPresistenceHSQLDB.java make query to the database to get the list of grocery ingredients and store it to an array.
 
-## GroceryListInterface.java
+## GroceryListPresistence.java
 
-GroceryListInterface.java is the interface for the grocery list class.
+GroceryListPresistence.java is the interface for the grocery list class.
 
 ## The Architecture Flow chart
 
