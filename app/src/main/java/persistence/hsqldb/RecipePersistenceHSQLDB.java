@@ -134,7 +134,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     public Recipe insertRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
             int recipeID = currentRecipe.getRecipeID();
-            PreparedStatement st = c.prepareStatement("INSERT INTO RECIPE VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO RECIPE VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             st.setInt(1, recipeID);
             st.setString(2, currentRecipe.getName());
             st.setString(3, currentRecipe.getNationality());
@@ -144,6 +144,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setString(7, currentRecipe.getDescription());
             st.setString(8, currentRecipe.getInstructions());
             st.setString(9, currentRecipe.getLink());
+            st.setBoolean(10, currentRecipe.getBookmarked());
             st.executeUpdate();
             st.close();
 
@@ -162,7 +163,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     public Recipe updateRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
             int recipeID = currentRecipe.getRecipeID();
-            final PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET name=?, nationality=?, prepTime=?, cookTime=?, cookingSkillLevel=?, description=?, instruction=?, link=? WHERE recipeID=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET name=?, nationality=?, prepTime=?, cookTime=?, cookingSkillLevel=?, description=?, instruction=?, link=? WHERE recipeID=? AND bookmarked=?");
             st.setString(1, currentRecipe.getName());
             st.setString(2, currentRecipe.getNationality());
             st.setInt(3, currentRecipe.getPrepTime());
@@ -172,6 +173,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setString(7, currentRecipe.getInstructions());
             st.setString(8, currentRecipe.getLink());
             st.setInt(9, recipeID);
+            st.setBoolean(10, currentRecipe.getBookmarked());
             st.executeUpdate();
             st.close();
 

@@ -100,6 +100,14 @@ public class Recipe implements Serializable {
         this.categoryList = categoryList;
     }
 
+    public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
+                  int prepTime, int cookTime, String cookingSkillLevel, String description,
+                  String instructions, String link, ArrayList<String> categoryList, boolean bookmarked)
+    {
+        this(recipeID, name, nationality, ingredientList, prepTime, cookTime, cookingSkillLevel, description, instructions, link, categoryList);
+        this.bookmarked = bookmarked;
+    }
+
     public int getRecipeID() { return this.recipeID; }
 
     /* getName()
