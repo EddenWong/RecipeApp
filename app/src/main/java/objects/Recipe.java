@@ -28,6 +28,7 @@ instructionList - Cooking instructions.
 link - Youtube link.
 vegetarian - String Yes or No if the food is vegetarian.
 filterList - Linked list of string filter. Holiday like Christmas, New Year, to Seafood.
+bookmarked - Bookmarking flag to remember the recipe for the user.
 
 Public method:
 Recipe() - Constructor to create an instance of recipe.
@@ -40,7 +41,8 @@ getDescription() - Get the description of the recipe.
 getInstructionList() - Get the instructions for the recipe.
 getLink() - Get the link for the recipe tutorial.
 getVegetarian() - Get boolean flag if the recipe is a vegetarian recipe.
-getFilter() - Get the list of filters for the recipe.
+getCategoryList() - Get the list of filters for the recipe.
+getBookmarked() - Get the bookmarking flag of the recipe.
 
 Future:
 Image of the recipe.
@@ -59,6 +61,7 @@ public class Recipe implements Serializable {
     private String instructions;
     private String link;
     private ArrayList<String> categoryList;
+    private boolean bookmarked;
 
     // Public method
 
@@ -77,13 +80,14 @@ public class Recipe implements Serializable {
         this.instructions = null;
         this.link = null;
         this.categoryList = null;
+        this.bookmarked = false;
     }
 
     public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
                   String instructions, String link, ArrayList<String> categoryList)
     {
-        this.recipeID = recipeID;
+        this(recipeID);
         this.name = name;
         this.nationality = nationality;
         this.ingredientList = ingredientList;
@@ -151,19 +155,21 @@ public class Recipe implements Serializable {
     */
     public String getLink() { return this.link; }
 
-
-    /* getFilter()
+    /* getCategoryList()
     Return:
     The list of filters for the recipe.
     */
     public ArrayList<String> getCategoryList() { return this.categoryList; }
+
+    /* getCategoryList()
+    Return:
+    The bookmarking flag of the recipe.
+    */
+    public boolean getBookmarked() { return this.bookmarked; }
 
     public String toString()
     {
         return name;
     }
 
-
 }
-
-
