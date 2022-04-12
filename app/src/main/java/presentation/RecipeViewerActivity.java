@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import business.AccessRecipes;
+import objects.Ingredient;
 import objects.Recipe;
 
 
@@ -66,14 +67,14 @@ public class RecipeViewerActivity extends AppCompatActivity {
         return true;
     }
 
-    private String formatIngredients(ArrayList<String> ingredientList)
+    private String formatIngredients(ArrayList<Ingredient> ingredientList)
     {
         String formattedIngredients = "No ingredients found";
 
         if(ingredientList != null) {
             formattedIngredients = "";
             for (int i = 0; i < ingredientList.size(); i++) {
-                formattedIngredients += ingredientList.get(i).toString();
+                formattedIngredients += ingredientList.get(i).getIngredientName().toString();
 
                 if (i < ingredientList.size() - 1) {
                     formattedIngredients += "\n";
@@ -198,10 +199,10 @@ public class RecipeViewerActivity extends AppCompatActivity {
         //If it is bookmarked, undo it
         //Construct new recipe and update the old one
         Recipe newRecipe;
-        int oldId = myRecipe.getRecipeID();
+        String oldId = myRecipe.getRecipeID();
         String oldName = myRecipe.getName();
         String oldNationality = myRecipe.getNationality();
-        ArrayList<String> oldIngredients = myRecipe.getIngredientList();
+        ArrayList<Ingredient> oldIngredients = myRecipe.getIngredientList();
         int oldPrep = myRecipe.getPrepTime();
         int oldCook = myRecipe.getCookTime();
         String oldSkill = myRecipe.getCookingSkillLevel();

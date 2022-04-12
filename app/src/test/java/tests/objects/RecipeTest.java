@@ -1,5 +1,6 @@
 package tests.objects;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import objects.Ingredient;
 import objects.Recipe;
 
 public class RecipeTest {
@@ -16,18 +18,21 @@ public class RecipeTest {
 
         System.out.println("\nStarting testRecipe");
 
-        ArrayList<String> ingredientList = new ArrayList<String>();
-        ingredientList.add("1 tps of sugar");
-        ingredientList.add("1 tps of salt");
-        ingredientList.add("1 tps of flour");
-        ingredientList.add("1 tbps of butter");
-
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        Ingredient ingredient = new Ingredient("100", "fish", "10", "bro", "nothing");
+        Ingredient ingredient2 = new Ingredient("200", "nom", "10", "bro", "nothing");
+        Ingredient ingredient3 = new Ingredient("300", "fsh", "10", "bro", "nothing");
+        Ingredient ingredient4 = new Ingredient("400", "ish", "10", "bro", "nothing");
+        ingredientList.add(ingredient);
+        ingredientList.add(ingredient2);
+        ingredientList.add(ingredient3);
+        ingredientList.add(ingredient4);
         ArrayList<String> categoryList = new ArrayList<String>();
-        ingredientList.add("Dessert");
+        categoryList.add("Dessert");
 
-        recipe = new Recipe(4, "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too easy", "Mix everything together. Eat it.", "MEME", categoryList);
+        recipe = new Recipe("4", "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too easy", "Mix everything together. Eat it.", "MEME", categoryList);
         assertNotNull(recipe);
-        assertTrue(4 == recipe.getRecipeID());
+        assertEquals("4", recipe.getRecipeID());
         assertTrue("Easy cake".equals(recipe.getName()));
         assertTrue("US".equals(recipe.getNationality()));
         assertTrue(ingredientList.equals(recipe.getIngredientList()));

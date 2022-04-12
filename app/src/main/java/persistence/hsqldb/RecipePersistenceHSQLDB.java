@@ -1,5 +1,6 @@
 package persistence.hsqldb;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,24 +9,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import objects.Ingredient;
 import objects.Recipe;
+import persistence.IngredientPersistence;
 import persistence.RecipePersistence;
 
 public class RecipePersistenceHSQLDB implements RecipePersistence {
 
     private final String dbPath;
+//    private IngredientPersistence ingredientPersistence;
 
     public RecipePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
+//        this.ingredientPersistence = new IngredientPersistenceHSQLDB(dbPath);
     }
 
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Recipe createRecipe(ResultSet rs, ArrayList<String> ingredientsList, ArrayList<String> categoryList) throws SQLException {
-        final int recipeID = rs.getInt("recipeID");
+    private Recipe createRecipe(ResultSet rs, ArrayList<Ingredient> ingredientsList, ArrayList<String> categoryList) throws SQLException {
+        final String recipeID = rs.getString("recipeID");
         final String recipeName = rs.getString("name");
         final String recipeNationality = rs.getString("nationality");
         final int prepTime = rs.getInt("preptime");
@@ -38,9 +44,9 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         return new Recipe(recipeID, recipeName, recipeNationality, ingredientsList, prepTime, cookTime, cookingSkillLevel, description, instruction, link, categoryList);
     }
 
-    private ArrayList<String> getListForRecipeFromDB(Connection c, int recipeID, String statement, String target) throws SQLException {
+    private ArrayList<String> getListForRecipeFromDB(Connection c, String recipeID, String statement, String target) throws SQLException {
         PreparedStatement theStatement = c.prepareStatement(statement);
-        theStatement.setInt(1, recipeID);
+        theStatement.setString(1, recipeID);
 
         ResultSet theRS = theStatement.executeQuery();
         ArrayList<String> theList = new ArrayList();
@@ -53,6 +59,41 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         return theList;
     }
 
+    private ArrayList<Ingredient> getIngredientListForRecipeFromDB(Connection c, String recipeID, String statement, String target) throws SQLException {
+        PreparedStatement theStatement = c.prepareStatement(statement);
+        theStatement.setString(1, recipeID);
+
+        ResultSet theRS = theStatement.executeQuery();
+        ArrayList<Ingredient> theList = new ArrayList();
+        while(theRS.next()){
+            String ingredientID = theRS.getString("ingredientID");
+            String name = theRS.getString("name");
+            String quantity = theRS.getString("quantity");
+            String unit = theRS.getString("unit");
+            String note = theRS.getString("note");
+            Ingredient newIngredient = new Ingredient(ingredientID, name, quantity, unit, note);
+            theList.add(newIngredient);
+        }
+        theRS.close();
+        theStatement.close();
+        return theList;
+    }
+
+    public ArrayList<Ingredient> getRecipeIngredients(String recipeID, Connection c) throws SQLException{
+        final ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        PreparedStatement st = c.prepareStatement("SELECT * FROM INGREDIENTS,RECIPEINGREDIENTS WHERE INGREDIENTS.INGREDIENTID = RECIPEINGREDIENTS.INGREDIENTID AND RECIPEID = ?");
+        st.setString(1, recipeID);
+        final ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            final Ingredient ingredient = new Ingredient(rs.getString("ingredientID"), rs.getString("name"), rs.getString("quantity"), rs.getString("unit"), rs.getString("note"));
+            ingredientList.add(ingredient);
+        }
+        rs.close();
+        st.close();
+
+        return ingredientList;
+    }
+
     @Override
     public List<Recipe> getRecipes() {
         final List<Recipe> recipes = new ArrayList<>();
@@ -60,8 +101,9 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM RECIPE");
             while (rs.next()) {
-                int recipeID = rs.getInt("RECIPEID");
-                ArrayList<String> ingredientsList = getListForRecipeFromDB(c, recipeID, "SELECT * FROM INGREDIENTS WHERE RECIPEID=?", "ingredient");
+                String recipeID = rs.getString("RECIPEID");
+//                ArrayList<String> ingredientsList = getListForRecipeFromDB(c, recipeID, "SELECT * FROM INGREDIENTS WHERE RECIPEID=?", "ingredient");
+                ArrayList<Ingredient> ingredientsList = getRecipeIngredients(recipeID, c);
                 ArrayList<String> categoryList = getListForRecipeFromDB(c, recipeID, "SELECT * FROM CATEGORIES WHERE RECIPEID=?", "category");
                 final Recipe recipe = createRecipe(rs, ingredientsList, categoryList);
                 recipes.add(recipe);
@@ -80,11 +122,11 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final List<Recipe> recipes = new ArrayList<>();
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPE WHERE recipeID = ?");
-            st.setInt(1, currentRecipe.getRecipeID());
+            st.setString(1, currentRecipe.getRecipeID());
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
-                ArrayList<String> ingredientsList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM INGREDIENTS WHERE RECIPEID=?", "ingredient");
+                ArrayList<Ingredient> ingredientsList = getRecipeIngredients(currentRecipe.getRecipeID(), c);
                 ArrayList<String> categoryList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM CATEGORIES WHERE RECIPEID=?", "category");
                 final Recipe recipe = createRecipe(rs, ingredientsList, categoryList);
                 recipes.add(recipe);
@@ -98,32 +140,32 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         }
     }
 
-    private void insertSmallTables(Connection c, int recipeID, ArrayList<String> ingredientList, ArrayList<String> categoryList) throws SQLException {
+    private void insertSmallTables(Connection c, String recipeID, ArrayList<Ingredient> ingredientList, ArrayList<String> categoryList) throws SQLException {
         for (int i = 0; i < ingredientList.size(); i++) {
             PreparedStatement st = c.prepareStatement("INSERT INTO INGREDIENTS VALUES(?, ?)");
-            st.setInt(1, recipeID);
-            st.setString(2, ingredientList.get(i));
+            st.setString(1, recipeID);
+            st.setString(2, ingredientList.get(i).getIngredientName());
             st.executeUpdate();
             st.close();
         }
 
         for (int i = 0; i < categoryList.size(); i++) {
             PreparedStatement st2 = c.prepareStatement("INSERT INTO CATEGORIES VALUES(?, ?)");
-            st2.setInt(1, recipeID);
+            st2.setString(1, recipeID);
             st2.setString(2, categoryList.get(i));
             st2.executeUpdate();
             st2.close();
         }
     }
 
-    private void updateSmallTables(Connection c, int recipeID, ArrayList<String> ingredientList, ArrayList<String> categoryList) throws SQLException {
+    private void updateSmallTables(Connection c, String recipeID, ArrayList<Ingredient> ingredientList, ArrayList<String> categoryList) throws SQLException {
         final PreparedStatement st = c.prepareStatement("DELETE FROM INGREDIENTS WHERE recipeID = ?");
-        st.setInt(1, recipeID);
+        st.setString(1, recipeID);
         st.executeUpdate();
         st.close();
 
         final PreparedStatement st2 = c.prepareStatement("DELETE FROM CATEGORIES WHERE recipeID = ?");
-        st2.setInt(1, recipeID);
+        st2.setString(1, recipeID);
         st2.executeUpdate();
         st2.close();
 
@@ -133,9 +175,10 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     @Override
     public Recipe insertRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
-            int recipeID = currentRecipe.getRecipeID();
+//            int recipeID = currentRecipe.getRecipeID();
+            String uuid = UUID.randomUUID().toString(); // Since when inserting the user will not be able to input an id, so the id field is always null, so we create a uuid for it
             PreparedStatement st = c.prepareStatement("INSERT INTO RECIPE VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1, recipeID);
+            st.setString(1, uuid);
             st.setString(2, currentRecipe.getName());
             st.setString(3, currentRecipe.getNationality());
             st.setInt(4, currentRecipe.getPrepTime());
@@ -147,10 +190,10 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.executeUpdate();
             st.close();
 
-            ArrayList<String> ingredientList = currentRecipe.getIngredientList();
+            ArrayList<Ingredient> ingredientList = currentRecipe.getIngredientList();
             ArrayList<String> categoryList = currentRecipe.getCategoryList();
 
-            insertSmallTables(c, recipeID, ingredientList, categoryList);
+            insertSmallTables(c, uuid, ingredientList, categoryList);
 
             return currentRecipe;
         } catch (final SQLException e) {
@@ -161,7 +204,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     @Override
     public Recipe updateRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
-            int recipeID = currentRecipe.getRecipeID();
+            String recipeID = currentRecipe.getRecipeID();
             final PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET name=?, nationality=?, prepTime=?, cookTime=?, cookingSkillLevel=?, description=?, instruction=?, link=? WHERE recipeID=?");
             st.setString(1, currentRecipe.getName());
             st.setString(2, currentRecipe.getNationality());
@@ -171,11 +214,11 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setString(6, currentRecipe.getDescription());
             st.setString(7, currentRecipe.getInstructions());
             st.setString(8, currentRecipe.getLink());
-            st.setInt(9, recipeID);
+            st.setString(9, recipeID);
             st.executeUpdate();
             st.close();
 
-            ArrayList<String> ingredientList = currentRecipe.getIngredientList();
+            ArrayList<Ingredient> ingredientList = getRecipeIngredients(recipeID, c);
             ArrayList<String> categoryList = currentRecipe.getCategoryList();
 
             updateSmallTables(c, recipeID, ingredientList , categoryList);
@@ -190,17 +233,17 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     public void deleteRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM INGREDIENTS WHERE recipeID = ?");
-            st.setInt(1, currentRecipe.getRecipeID());
+            st.setString(1, currentRecipe.getRecipeID());
             st.executeUpdate();
             st.close();
 
             final PreparedStatement st2 = c.prepareStatement("DELETE FROM CATEGORIES WHERE recipeID = ?");
-            st2.setInt(1, currentRecipe.getRecipeID());
+            st2.setString(1, currentRecipe.getRecipeID());
             st2.executeUpdate();
             st2.close();
 
             final PreparedStatement sc = c.prepareStatement("DELETE FROM RECIPE WHERE recipeID = ?");
-            sc.setInt(1, currentRecipe.getRecipeID());
+            sc.setString(1, currentRecipe.getRecipeID());
             sc.executeUpdate();
             sc.close();
 

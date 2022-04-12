@@ -48,10 +48,10 @@ Image of the recipe.
 
 public class Recipe implements Serializable {
     // Private member
-    private int recipeID;
+    private String recipeID;
     private String name;
     private String nationality;
-    private ArrayList<String> ingredientList;
+    private ArrayList<Ingredient> ingredientList;
     private int prepTime;
     private int cookTime;
     private String cookingSkillLevel;
@@ -65,7 +65,7 @@ public class Recipe implements Serializable {
     /* Recipe()
     Constructor to create an instance of recipe.
     */
-    public Recipe(final int newRecipeID) {
+    public Recipe(final String newRecipeID) {
         this.recipeID = newRecipeID;
         this.name = null;
         this.nationality = null;
@@ -79,7 +79,7 @@ public class Recipe implements Serializable {
         this.categoryList = null;
     }
 
-    public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
+    public Recipe(String recipeID, String name, String nationality, ArrayList<Ingredient> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
                   String instructions, String link, ArrayList<String> categoryList)
     {
@@ -96,7 +96,7 @@ public class Recipe implements Serializable {
         this.categoryList = categoryList;
     }
 
-    public int getRecipeID() { return this.recipeID; }
+    public String getRecipeID() { return this.recipeID; }
 
     /* getName()
     Return:
@@ -115,7 +115,7 @@ public class Recipe implements Serializable {
     Prep time for the recipe.
     */
 
-    public ArrayList<String> getIngredientList() {
+    public ArrayList<Ingredient> getIngredientList() {
         return this.ingredientList;
     }
 
