@@ -107,9 +107,12 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
 
     private void insertSmallTables(Connection c, String recipeID, ArrayList<Ingredient> ingredientList, ArrayList<String> categoryList) throws SQLException {
         for (int i = 0; i < ingredientList.size(); i++) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO INGREDIENTS VALUES(?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO RecipeINGREDIENTS VALUES(?, ?, ?, ?, ?)");
             st.setString(1, recipeID);
             st.setString(2, ingredientList.get(i).getIngredientName());
+            st.setString(3, ingredientList.get(i).getQuantity());
+            st.setString(4, ingredientList.get(i).getUnit());
+            st.setString(5, ingredientList.get(i).getNote());
             st.executeUpdate();
             st.close();
         }
@@ -124,7 +127,12 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     }
 
     private void updateSmallTables(Connection c, String recipeID, ArrayList<Ingredient> ingredientList, ArrayList<String> categoryList) throws SQLException {
-        final PreparedStatement st = c.prepareStatement("DELETE FROM INGREDIENTS WHERE recipeID = ?");
+        /* May be this is slow, since the db has to DELETE every entry, then INSERT again, but right now it's just easier to do.
+        The right way is probably to go through each ingredient in the ingredient list, and do UPDATE SET... for each primary key pairs,
+        and check if the line to be updated is in the table. If not in the table, it means we need to INSERT into the table a new line.
+        Tech debt right here, but for now I don't care so much.
+         */
+        final PreparedStatement st = c.prepareStatement("DELETE FROM RecipeINGREDIENTS WHERE recipeID = ?");
         st.setString(1, recipeID);
         st.executeUpdate();
         st.close();
@@ -197,7 +205,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     @Override
     public void deleteRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM INGREDIENTS WHERE recipeID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM RecipeINGREDIENTS WHERE recipeID = ?");
             st.setString(1, currentRecipe.getRecipeID());
             st.executeUpdate();
             st.close();
