@@ -74,7 +74,13 @@ public class RecipeViewerActivity extends AppCompatActivity {
         if(ingredientList != null) {
             formattedIngredients = "";
             for (int i = 0; i < ingredientList.size(); i++) {
-                formattedIngredients += ingredientList.get(i).getIngredientName().toString();
+                formattedIngredients += ingredientList.get(i).getQuantity() + " ";
+                formattedIngredients += ingredientList.get(i).getUnit() + "\t\t";
+                formattedIngredients += ingredientList.get(i).getIngredientName();
+                if (ingredientList.get(i).getNote() != null) {
+                    formattedIngredients += " (" + ingredientList.get(i).getNote() + ")";
+                }
+
 
                 if (i < ingredientList.size() - 1) {
                     formattedIngredients += "\n";

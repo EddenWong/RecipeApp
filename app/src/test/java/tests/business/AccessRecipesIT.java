@@ -65,7 +65,7 @@ public class AccessRecipesIT {
     @Test
     public void testInsertRecipe() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        Ingredient ingredient = new Ingredient("100", "fish", "10", "bro", "nothing");
+        Ingredient ingredient = new Ingredient("fish", "10", "bro", "nothing");
         ingredientList.add(ingredient);
 
         ArrayList<String> categoryList = new ArrayList<>();
@@ -79,7 +79,7 @@ public class AccessRecipesIT {
     @Test
     public void testUpdateRecipe() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        Ingredient ingredient = new Ingredient("100", "fish", "10", "bro", "nothing");
+        Ingredient ingredient = new Ingredient( "fish", "10", "bro", "nothing");
         ingredientList.add(ingredient);
 
         ArrayList<String> categoryList = new ArrayList<>();

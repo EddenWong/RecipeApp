@@ -1,22 +1,18 @@
 package objects;
 
-public class Ingredient {
-    private String ingredientID;
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     private String ingredientName;
     private String quantity;
     private String unit;
     private String note;
 
-    public Ingredient(String ingredientID, String ingredientName, String quantity, String unit, String note) {
-        this.ingredientID = ingredientID;
+    public Ingredient(String ingredientName, String quantity, String unit, String note) {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
         this.note = note;
-    }
-
-    public String getIngredientID() {
-        return this.ingredientID;
     }
 
     public String getIngredientName() {

@@ -38,34 +38,34 @@ public class IngredientPersistenceHSQLDB implements IngredientPersistence {
 //        return new Recipe(recipeID, recipeName, recipeNationality, ingredientsList, prepTime, cookTime, cookingSkillLevel, description, instruction, link, categoryList);
 //    }
 
-    @Override
-    public List<Ingredient> getIngredientList() {
-        final List<Ingredient> ingredientList = new ArrayList<>();
-        try (final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM INGREDIENTS");
-            while (rs.next()) {
-                final Ingredient ingredient = new Ingredient(rs.getString("ingredientID"), rs.getString("name"), null, null, null);
-                ingredientList.add(ingredient);
-            }
-            rs.close();
-            st.close();
-
-            return ingredientList;
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
-    }
+//    @Override
+//    public List<Ingredient> getIngredientList() {
+//        final List<Ingredient> ingredientList = new ArrayList<>();
+//        try (final Connection c = connection()) {
+//            final Statement st = c.createStatement();
+//            final ResultSet rs = st.executeQuery("SELECT * FROM INGREDIENTS");
+//            while (rs.next()) {
+//                final Ingredient ingredient = new Ingredient(rs.getString("name"), null, null, null);
+//                ingredientList.add(ingredient);
+//            }
+//            rs.close();
+//            st.close();
+//
+//            return ingredientList;
+//        } catch (final SQLException e) {
+//            throw new PersistenceException(e);
+//        }
+//    }
 
     @Override
     public ArrayList<Ingredient> getRecipeIngredients(String recipeID) {
         final ArrayList<Ingredient> ingredientList = new ArrayList<>();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPEINGREDIENTS, INGREDIENTS WHERE INGREDIENTS.INGREDIENTID=RECIPEINGREDIENTS.INGREDIENTID AND RECIPEID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPEINGREDIENTS WHERE RECIPEID = ?");
             st.setString(1, recipeID);
             final ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                final Ingredient ingredient = new Ingredient(rs.getString("ingredientID"), rs.getString("name"), rs.getString("quantity"), rs.getString("unit"), rs.getString("note"));
+                final Ingredient ingredient = new Ingredient(rs.getString("ingredientName"), rs.getString("quantity"), rs.getString("unit"), rs.getString("note"));
                 ingredientList.add(ingredient);
             }
             rs.close();
@@ -84,30 +84,9 @@ public class IngredientPersistenceHSQLDB implements IngredientPersistence {
 
     @Override
     public Ingredient insertIngredient(Ingredient currentIngredient) {
-//        try (final Connection c = connection()) {
-//            int recipeID = currentRecipe.getRecipeID();
-//            PreparedStatement st = c.prepareStatement("INSERT INTO RECIPE VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-//            st.setInt(1, recipeID);
-//            st.setString(2, currentRecipe.getName());
-//            st.setString(3, currentRecipe.getNationality());
-//            st.setInt(4, currentRecipe.getPrepTime());
-//            st.setInt(5, currentRecipe.getCookTime());
-//            st.setString(6, currentRecipe.getCookingSkillLevel());
-//            st.setString(7, currentRecipe.getDescription());
-//            st.setString(8, currentRecipe.getInstructions());
-//            st.setString(9, currentRecipe.getLink());
-//            st.executeUpdate();
-//            st.close();
-//
-//            ArrayList<String> ingredientList = currentRecipe.getIngredientList();
-//            ArrayList<String> categoryList = currentRecipe.getCategoryList();
-//
-//            insertSmallTables(c, recipeID, ingredientList, categoryList);
-//
-//            return currentRecipe;
-//        } catch (final SQLException e) {
-//            throw new PersistenceException(e);
-//        }
+        /* Insert ingredient into Ingredient table so that when we add a new ingredient that is not in the table using either the (future) insert button in grocery list
+        or by modifying the recipe, or by adding a new recipe. Need to check if the ingredient already exist in the table.
+        */
         return null;
     }
 

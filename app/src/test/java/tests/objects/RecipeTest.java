@@ -19,10 +19,10 @@ public class RecipeTest {
         System.out.println("\nStarting testRecipe");
 
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        Ingredient ingredient = new Ingredient("100", "fish", "10", "bro", "nothing");
-        Ingredient ingredient2 = new Ingredient("200", "nom", "10", "bro", "nothing");
-        Ingredient ingredient3 = new Ingredient("300", "fsh", "10", "bro", "nothing");
-        Ingredient ingredient4 = new Ingredient("400", "ish", "10", "bro", "nothing");
+        Ingredient ingredient = new Ingredient("fish", "10", "bro", "nothing");
+        Ingredient ingredient2 = new Ingredient("nom", "10", "bro", "nothing");
+        Ingredient ingredient3 = new Ingredient("fsh", "10", "bro", "nothing");
+        Ingredient ingredient4 = new Ingredient("ish", "10", "bro", "nothing");
         ingredientList.add(ingredient);
         ingredientList.add(ingredient2);
         ingredientList.add(ingredient3);
