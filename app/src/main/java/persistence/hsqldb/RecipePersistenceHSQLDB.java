@@ -163,7 +163,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     public Recipe updateRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
             int recipeID = currentRecipe.getRecipeID();
-            final PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET name=?, nationality=?, prepTime=?, cookTime=?, cookingSkillLevel=?, description=?, instruction=?, link=? WHERE recipeID=? AND bookmarked=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE RECIPE SET name=?, nationality=?, prepTime=?, cookTime=?, cookingSkillLevel=?, description=?, instruction=?, link=? WHERE recipeID=?, bookmarked=?");
             st.setString(1, currentRecipe.getName());
             st.setString(2, currentRecipe.getNationality());
             st.setInt(3, currentRecipe.getPrepTime());
