@@ -10,16 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
         <activity
+            android:name="presentation.RecipeEditActivity"
+            android:exported="false" />
+        <activity
             android:name="presentation.RecipeListActivity"
             android:exported="false"
-            android:label="Recipe List"/>
+            android:label="Recipe List" />
         <activity
             android:name="presentation.RecipeViewerActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name="presentation.GroceryListActivity"
             android:exported="false"
-            android:label="Grocery List"/>
+            android:label="Grocery List" />
         <activity
             android:name="presentation.HomeActivity"
             android:exported="true">

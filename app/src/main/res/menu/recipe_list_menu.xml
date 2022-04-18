@@ -7,5 +7,8 @@
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|withText"
         />
+    <item
+        android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="always" />
 
 </menu>
