@@ -1,0 +1,30 @@
+
+.header
+{
+    padding: 80px;
+    text-align: center;
+    background: #A9A9A9;
+    color: white;
+}
+
+.header h1
+{
+    font-size: 40px;
+}
+
+.Contents
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#README
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50px;
+    height: 500px;
+    width: 800px;
+}
