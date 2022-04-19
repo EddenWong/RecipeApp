@@ -31,5 +31,8 @@
     <string name="recipe_bookmark_button">Bookmark</string>
     <string name="recipe_print_button">Print</string>
 
+    <string name="recipe_add_next">Next</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
