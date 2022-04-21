@@ -56,8 +56,6 @@ public class RecipeListActivity extends AppCompatActivity {
                 recipeNames.add(recipeList.get(i).getName());
             }
 
-            System.out.println(recipeNames);
-
             //Make an arrayadapter wrapper
             recipeArrayAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList)
             {

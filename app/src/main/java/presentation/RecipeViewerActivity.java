@@ -81,7 +81,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
                     formattedIngredients += " (" + ingredientList.get(i).getNote() + ")";
                 }
 
-
                 if (i < ingredientList.size() - 1) {
                     formattedIngredients += "\n";
                 }
@@ -129,7 +128,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //Log.i(TAG, "page finished loading " + url);
                 createWebPrintJob(view);
                 mWebView = null;
             }

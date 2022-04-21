@@ -30,4 +30,18 @@ public class Ingredient implements Serializable {
     public String getNote() {
         return this.note;
     }
+
+    public String toString()
+    {
+        String ingredient = "";
+        ingredient += quantity + " ";
+        ingredient += unit + "\t\t";
+        ingredient += ingredientName;
+        if (note != null) {
+            ingredient += " (" + note + ")";
+        }
+
+        return ingredient;
+    }
+
 }
