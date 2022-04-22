@@ -1,8 +1,10 @@
 package presentation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -112,9 +114,36 @@ public class RecipeViewerActivity extends AppCompatActivity {
             case R.id.recipeBookmark:
                 bookmark();
                 break;
+            case R.id.recipeDelete:
+                delete();
+                break;
+
         }
 
         return true;
+    }
+
+    private void delete()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(RecipeViewerActivity.this).create();
+        alertDialog.setTitle("Delete Recipe");
+        alertDialog.setMessage("Are you sure you want to delete " + myRecipe.getName() + "?");
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                accessRecipes.deleteRecipe(myRecipe);
+                finish();
+            }
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+
+        alertDialog.show();
+
     }
 
     private void doPrint() {

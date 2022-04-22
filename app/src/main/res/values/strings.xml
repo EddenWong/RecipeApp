@@ -30,6 +30,7 @@
 
     <string name="recipe_bookmark_button">Bookmark</string>
     <string name="recipe_print_button">Print</string>
+    <string name="recipe_delete_button">Delete</string>
 
     <string name="recipe_add_ingredient">Add Ingredient</string>
     <string name="add">Add</string>
