@@ -15,6 +15,7 @@ public class RecipeTest {
     @Test
     public void testRecipe1() {
         Recipe recipe;
+        Recipe recipe1;
 
         System.out.println("\nStarting testRecipe");
 
@@ -43,6 +44,10 @@ public class RecipeTest {
         assertTrue("Mix everything together. Eat it.".equals(recipe.getInstructions()));
         assertTrue("MEME".equals(recipe.getLink()));
         assertTrue(categoryList.equals(recipe.getCategoryList()));
+
+        recipe1 = new Recipe("Random");
+        assertNotNull(recipe);
+        assertEquals("Random", recipe1.getRecipeID());
 
         System.out.println("Finished testStudent");
     }

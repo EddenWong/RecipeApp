@@ -7,11 +7,11 @@ public class Main
 //    private static String dbName="src/main/assets/db/SC";
     private static String dbName="SC";
 
-    public static void main(String[] args)
-    {
-//		CLI.run();
-        System.out.println("All done");
-    }
+//    public static void main(String[] args)
+//    {
+////		CLI.run();
+//        System.out.println("All done");
+//    }
 
     public static void setDBPathName(final String name) {
         try {
