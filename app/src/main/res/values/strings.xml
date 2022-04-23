@@ -29,8 +29,10 @@
     <string name="recipe_soup">Soup</string>
 
     <string name="recipe_bookmark_button">Bookmark</string>
+    <string name="recipe_to_grocery_button">Add Ingredients to Grocery</string>
     <string name="recipe_print_button">Print</string>
     <string name="recipe_delete_button">Delete</string>
+    <string name="recipe_edit_button">Edit</string>
 
     <string name="recipe_add_ingredient">Add Ingredient</string>
     <string name="add">Add</string>

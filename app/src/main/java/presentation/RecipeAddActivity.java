@@ -38,6 +38,8 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
     private ArrayAdapter<String> categoryArrayAdapter;
     private AccessRecipes accessRecipes;
 
+    private Recipe myRecipe;
+    private String id = "";
     private EditText name;
     private EditText description;
     private EditText skillLevel;
@@ -45,6 +47,7 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
     private EditText cookTime;
     private Spinner categories;
     private EditText instructions;
+    private  String[] myCategories = new String[]{"Appetizer","Dessert","Entree","Soup"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,6 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
         instructions = findViewById(R.id.recipeInstructions);
         accessRecipes = new AccessRecipes();
         ingredientList = new ArrayList<>();
-        String[] myCategories = new String[]{"Appetizer","Dessert","Entree","Soup"};
         categoryArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, myCategories);
         categories.setAdapter(categoryArrayAdapter);
 
@@ -83,6 +85,30 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
                 return true;
             }
         });
+
+        //If a bundle was passed through
+        if(getIntent().getExtras() != null)
+        {
+            myRecipe = (Recipe) getIntent().getSerializableExtra("recipe");
+
+            name.setText(myRecipe.getName());
+            description.setText(myRecipe.getDescription());
+            skillLevel.setText(myRecipe.getCookingSkillLevel());
+            prepTime.setText(String.valueOf(myRecipe.getPrepTime()));
+            cookTime.setText(String.valueOf(myRecipe.getCookTime()));
+            ingredientList.addAll(myRecipe.getIngredientList());
+            ingredientArrayAdapter.notifyDataSetChanged();
+
+            String newInstuctions = myRecipe.getInstructions().replace("$","\n");
+            instructions.setText(newInstuctions);
+            for(int i = 0; i < myCategories.length; i++)
+            {
+                if(myRecipe.getCategoryList().contains(myCategories[i]));
+                categories.setSelection(i);
+            }
+
+            id = myRecipe.getRecipeID();
+        }
 
     }
 
@@ -137,8 +163,17 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
             //Check if numbers are within range
             if(checkInt(prepTime.getText().toString()) && checkInt(cookTime.getText().toString())) {
 
-                Recipe newRecipe = new Recipe(null, name.getText().toString(), null, ingredientList, Integer.parseInt(prepTime.getText().toString()), Integer.parseInt(cookTime.getText().toString()), skillLevel.getText().toString(), description.getText().toString(), instructions.getText().toString(), null, newCategories);
-                accessRecipes.insertRecipe(newRecipe);
+                Recipe newRecipe = new Recipe(id, name.getText().toString(), null, ingredientList, Integer.parseInt(prepTime.getText().toString()), Integer.parseInt(cookTime.getText().toString()), skillLevel.getText().toString(), description.getText().toString(), instructions.getText().toString(), null, newCategories);
+
+                if(myRecipe != null)
+                {
+                    accessRecipes.updateRecipe(newRecipe);
+                }
+                else
+                {
+                    accessRecipes.insertRecipe(newRecipe);
+                }
+
                 finish();
             }
         }

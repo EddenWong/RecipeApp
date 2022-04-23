@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -21,6 +22,7 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import business.AccessGroceryList;
 import business.AccessRecipes;
 import objects.Ingredient;
 import objects.Recipe;
@@ -117,11 +119,38 @@ public class RecipeViewerActivity extends AppCompatActivity {
             case R.id.recipeDelete:
                 delete();
                 break;
+            case R.id.recipeIngredientToGrocery:
+                addToGroceryList();
+                break;
+            case R.id.recipeEdit:
+                editRecipe();
+                break;
 
         }
 
         return true;
     }
+
+    private void editRecipe()
+    {
+        Intent recipeIntent = new Intent(RecipeViewerActivity.this,RecipeAddActivity.class);
+        recipeIntent.putExtra("recipe",myRecipe);
+        startActivity(recipeIntent);
+    }
+
+
+    private void addToGroceryList()
+    {
+        if(myRecipe.getIngredientList() != null) {
+            AccessGroceryList accessGrocery = new AccessGroceryList();
+
+            for(int i = 0; i < myRecipe.getIngredientList().size(); i++)
+            {
+                accessGrocery.insertItem(myRecipe.getIngredientList().get(i).toString());
+            }
+        }
+    }
+
 
     private void delete()
     {
