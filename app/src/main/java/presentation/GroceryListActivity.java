@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,10 +20,14 @@ import android.widget.Toast;
 import com.example.recipeapp.R;
 
 import java.util.ArrayList;
+
+import business.AccessGroceryList;
+import objects.Recipe;
 import persistence.GroceryList;
 
 public class GroceryListActivity extends AppCompatActivity {
 
+    private AccessGroceryList accessGroceries;
     ArrayList<String> groceryList = null;
     ListView groceryListView;
     ArrayAdapter myArrayAdapter;
@@ -34,8 +39,16 @@ public class GroceryListActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
-        groceryListView = findViewById(R.id.groceryListView);
-        myArrayAdapter = new ArrayAdapter(GroceryListActivity.this, android.R.layout.simple_list_item_1, groceryList);
+
+        accessGroceries = new AccessGroceryList();
+
+        groceryList = new ArrayList<>();
+        groceryList.addAll(accessGroceries.getGroceryList());
+
+        //Make an arrayadapter wrapper
+        myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, groceryList);
+
+        final ListView groceryListView = findViewById(R.id.groceryListView);
         groceryListView.setAdapter(myArrayAdapter);
 
         groceryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,6 +142,7 @@ public class GroceryListActivity extends AppCompatActivity {
 
                 if (!etItem.getText().toString().isEmpty()) {
                     groceryList.add(etItem.getText().toString().trim());
+                    accessGroceries.insertItem(etItem.getText().toString().trim());
                     myArrayAdapter.notifyDataSetChanged();
                 } else {
                     etItem.setError("Enter item");

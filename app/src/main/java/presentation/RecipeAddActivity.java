@@ -81,7 +81,6 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
                 ingredientArrayAdapter.notifyDataSetChanged();
                 setIngredientListHeight();
 
-
                 return true;
             }
         });
