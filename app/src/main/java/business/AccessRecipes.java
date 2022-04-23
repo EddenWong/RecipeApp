@@ -31,6 +31,11 @@ public class AccessRecipes {
         return Collections.unmodifiableList(recipes);
     }
 
+    public Recipe getRecipe(Recipe currentRecipe) {
+        recipe = recipePersistence.getRecipe(currentRecipe);
+        return recipe;
+    }
+
     public Recipe getSequential()
     {
         if (recipes == null)
