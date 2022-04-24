@@ -96,6 +96,10 @@ public class Recipe implements Serializable {
         this.categoryList = categoryList;
     }
 
+    /* getRecipeID()
+    Return:
+    The recipe ID.
+    */
     public String getRecipeID() { return this.recipeID; }
 
     /* getName()
@@ -110,15 +114,18 @@ public class Recipe implements Serializable {
     */
     public String getNationality() { return this.nationality; }
 
-    /* getPrepTime()
+    /* getIngredientList()
     Return:
-    Prep time for the recipe.
+    The list of ingredients for the recipe.
     */
-
     public ArrayList<Ingredient> getIngredientList() {
         return this.ingredientList;
     }
 
+    /* getPrepTime()
+    Return:
+    Prep time for the recipe.
+    */
     public int getPrepTime() { return this.prepTime; }
 
     /* getCookTime()
@@ -152,18 +159,19 @@ public class Recipe implements Serializable {
     public String getLink() { return this.link; }
 
 
-    /* getFilter()
+    /* getCategoryList()
     Return:
     The list of filters for the recipe.
     */
     public ArrayList<String> getCategoryList() { return this.categoryList; }
 
+    /* toString()
+    Return:
+    Default string for the instance.
+    */
     public String toString()
     {
-        return name;
+        return this.getName();
     }
 
-
 }
-
-
