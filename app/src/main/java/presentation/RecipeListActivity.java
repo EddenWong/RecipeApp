@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -42,54 +41,6 @@ public class RecipeListActivity extends AppCompatActivity {
 
         accessRecipes = new AccessRecipes();
         setList();
-        /*try
-        {
-            recipeList = new ArrayList<>();
-            recipeList.addAll(accessRecipes.getRecipes());
-
-            recipeNames = new ArrayList<>();
-            for(int i = 0; i < recipeList.size(); i++)
-            {
-                recipeNames.add(recipeList.get(i).getName());
-            }
-
-            System.out.println(recipeNames);
-
-            //Make an arrayadapter wrapper
-            recipeArrayAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList)
-            {
-               @Override
-               public View getView(int position, View convertView, ViewGroup parent) {
-                    View view = super.getView(position, convertView, parent);
-
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                    text1.setText(recipeList.get(position).getName());
-                    text2.setText(recipeList.get(position).getCookingSkillLevel());
-
-                    return view;
-                }
-            };
-
-            final ListView listView = findViewById(R.id.listRecipes);
-            listView.setAdapter(recipeArrayAdapter);
-
-            listView.setOnItemClickListener((adapterView, view, position, l) -> {
-                Recipe item = (Recipe)adapterView.getItemAtPosition(position);
-
-                Intent recipeIntent = new Intent(RecipeListActivity.this,RecipeViewerActivity.class);
-                recipeIntent.putExtra("recipe",item);
-                startActivity(recipeIntent);
-
-            });
-
-        }
-        catch (final Exception e)
-        {
-            e.printStackTrace();
-        }
-*/
     }
 
     private void setList()
@@ -105,24 +56,8 @@ public class RecipeListActivity extends AppCompatActivity {
                 recipeNames.add(recipeList.get(i).getName());
             }
 
-            System.out.println(recipeNames);
-
             //Make an arrayadapter wrapper
-            recipeArrayAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList)
-            {
-              /* @Override
-               public View getView(int position, View convertView, ViewGroup parent) {
-                    View view = super.getView(position, convertView, parent);
-
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                    text1.setText(recipeList.get(position).getName());
-                    text2.setText(recipeList.get(position).getCookingSkillLevel());
-
-                    return view;
-                }*/
-            };
+            recipeArrayAdapter = new ArrayAdapter<Recipe>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, recipeList);
 
             final ListView listView = findViewById(R.id.listRecipes);
             listView.setAdapter(recipeArrayAdapter);
@@ -159,6 +94,12 @@ public class RecipeListActivity extends AppCompatActivity {
         searchBar(menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void buttonAddRecipeClick(MenuItem item)
+    {
+        Intent addIntent = new Intent(RecipeListActivity.this, RecipeAddActivity.class);
+        RecipeListActivity.this.startActivity(addIntent);
     }
 
     public void buttonFilterOnClick(View v)

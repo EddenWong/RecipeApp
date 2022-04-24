@@ -1,8 +1,11 @@
 package presentation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -19,6 +22,7 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import business.AccessGroceryList;
 import business.AccessRecipes;
 import objects.Ingredient;
 import objects.Recipe;
@@ -81,7 +85,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
                     formattedIngredients += " (" + ingredientList.get(i).getNote() + ")";
                 }
 
-
                 if (i < ingredientList.size() - 1) {
                     formattedIngredients += "\n";
                 }
@@ -113,9 +116,63 @@ public class RecipeViewerActivity extends AppCompatActivity {
             case R.id.recipeBookmark:
                 bookmark();
                 break;
+            case R.id.recipeDelete:
+                delete();
+                break;
+            case R.id.recipeIngredientToGrocery:
+                addToGroceryList();
+                break;
+            case R.id.recipeEdit:
+                editRecipe();
+                break;
+
         }
 
         return true;
+    }
+
+    private void editRecipe()
+    {
+        Intent recipeIntent = new Intent(RecipeViewerActivity.this,RecipeAddActivity.class);
+        recipeIntent.putExtra("recipe",myRecipe);
+        startActivity(recipeIntent);
+    }
+
+
+    private void addToGroceryList()
+    {
+        if(myRecipe.getIngredientList() != null) {
+            AccessGroceryList accessGrocery = new AccessGroceryList();
+
+            for(int i = 0; i < myRecipe.getIngredientList().size(); i++)
+            {
+                accessGrocery.insertItem(myRecipe.getIngredientList().get(i).toString());
+            }
+        }
+    }
+
+
+    private void delete()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(RecipeViewerActivity.this).create();
+        alertDialog.setTitle("Delete Recipe");
+        alertDialog.setMessage("Are you sure you want to delete " + myRecipe.getName() + "?");
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                accessRecipes.deleteRecipe(myRecipe);
+                finish();
+            }
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+
+        alertDialog.show();
+
     }
 
     private void doPrint() {
@@ -129,7 +186,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //Log.i(TAG, "page finished loading " + url);
                 createWebPrintJob(view);
                 mWebView = null;
             }
