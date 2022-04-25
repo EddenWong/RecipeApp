@@ -78,7 +78,7 @@ When deleting the ingredent from the GroceryList or recipe from the RecipeList, 
 
 Velocity/teamwork
 =================
-7/14 issues complete for iteration 3.
+9/14 issues complete for iteration 3.
 
 We have definitely noticed an improvement in our velocity as we are able to push more issues through. However, our estimate is still not accurate since our team members are getting other school course loads and it is unpredictable.
 
