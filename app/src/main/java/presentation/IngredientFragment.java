@@ -101,10 +101,6 @@ public class IngredientFragment extends DialogFragment {
                     {
                         Toast.makeText(getActivity(), "Please fill in an amount", Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(iUnits.getText().toString()))
-                    {
-                        Toast.makeText(getActivity(), "Please fill in a unit", Toast.LENGTH_SHORT).show();
-                    }
                     else
                     {
 

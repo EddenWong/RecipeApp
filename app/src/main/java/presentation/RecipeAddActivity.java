@@ -49,6 +49,8 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
     private EditText instructions;
     private  String[] myCategories = new String[]{"Appetizer","Dessert","Entree","Soup"};
 
+    final int MAX_STRING_LENGTH = 40;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,7 +164,7 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
             //Check if numbers are within range
             if(checkInt(prepTime.getText().toString()) && checkInt(cookTime.getText().toString())) {
 
-                Recipe newRecipe = new Recipe(id, name.getText().toString(), null, ingredientList, Integer.parseInt(prepTime.getText().toString()), Integer.parseInt(cookTime.getText().toString()), skillLevel.getText().toString(), description.getText().toString(), instructions.getText().toString(), null, newCategories);
+                Recipe newRecipe = new Recipe(id, truncateText(name.getText().toString(), 40), null, ingredientList, Integer.parseInt(prepTime.getText().toString()), Integer.parseInt(cookTime.getText().toString()), truncateText(skillLevel.getText().toString(), 15), truncateText(description.getText().toString(),2000), truncateText(instructions.getText().toString(),2000), null, newCategories);
 
                 if(myRecipe != null)
                 {
@@ -199,6 +201,16 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
             Toast.makeText(this, "Time too long", Toast.LENGTH_SHORT).show();
             returnVal = false;
         }
+
+        return returnVal;
+    }
+
+    private String truncateText(String s, int maxLength)
+    {
+        String returnVal = s;
+
+        if(returnVal.length() > maxLength)
+            returnVal = returnVal.substring(0,maxLength-3) + "...";
 
         return returnVal;
     }
