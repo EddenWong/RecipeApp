@@ -61,7 +61,6 @@ public class Recipe implements Serializable {
     private String instructions;
     private String link;
     private ArrayList<String> categoryList;
-    private boolean bookmarked;
 
     // Public method
 
@@ -80,7 +79,6 @@ public class Recipe implements Serializable {
         this.instructions = null;
         this.link = null;
         this.categoryList = null;
-        this.bookmarked = false;
     }
 
     public Recipe(String recipeID, String name, String nationality, ArrayList<Ingredient> ingredientList,
