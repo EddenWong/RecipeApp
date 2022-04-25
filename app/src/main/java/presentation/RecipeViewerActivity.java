@@ -33,6 +33,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
     private Recipe myRecipe;
     private WebView mWebView;
     private AccessRecipes accessRecipes;
+    private Menu myMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,26 @@ public class RecipeViewerActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.recipe_pop_up_menu, menu);
+        myMenu = menu;
+        updateMenuText();
+
+
         return true;
     }
+
+    private void updateMenuText()
+    {
+        MenuItem bookmarkMenu = myMenu.findItem(R.id.recipeBookmark);
+
+        if(myRecipe.getCategoryList().contains("Bookmarked")) {
+            bookmarkMenu.setTitle("Unbookmark");
+        }
+        else {
+            bookmarkMenu.setTitle("Bookmark");
+        }
+
+    }
+
 
     private String formatIngredients(ArrayList<Ingredient> ingredientList)
     {
@@ -298,6 +317,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
         //Replace old category
         TextView categories = findViewById(R.id.recipeCategories);
         categories.setText(myRecipe.getCategoryList().toString());
+        updateMenuText();
 
     }
 }

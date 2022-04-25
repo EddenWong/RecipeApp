@@ -95,6 +95,7 @@ public class GroceryListActivity extends AppCompatActivity {
                             case R.id.item_delete:
 
                                 Toast.makeText(GroceryListActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                accessGroceries.deleteItem(groceryList.get(position));
                                 groceryList.remove(position);
                                 myArrayAdapter.notifyDataSetChanged();
                                 break;
