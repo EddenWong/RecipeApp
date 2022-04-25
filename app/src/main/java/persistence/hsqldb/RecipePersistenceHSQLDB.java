@@ -157,6 +157,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setString(7, currentRecipe.getDescription());
             st.setString(8, currentRecipe.getInstructions());
             st.setString(9, currentRecipe.getLink());
+            st.setBoolean(10, currentRecipe.getBookmarked());
             st.executeUpdate();
             st.close();
 

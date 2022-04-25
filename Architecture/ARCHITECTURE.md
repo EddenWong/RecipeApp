@@ -44,6 +44,34 @@ GroceryListPresistenceHSQLDB.java make query to the database to get the list of 
 
 GroceryListPresistence.java is the interface for the grocery list class.
 
+## Ingredient.java
+
+Ingredient.java is the class containing the information about the ingredient as well as methods to get the information about it.
+
+
+## IngredientPersistence.java
+
+GroceryListPresistence.java is the interface for the ingredient list class.
+
+## IngredientPersistenceHSQLDB.java
+
+GroceryListPresistenceHSQLDB.java make query to the database to get the list of ingredients and store it to an array.
+
+
+## RecipeReturnInterface.java
+
+RecipeReturnInterface.java is used to return a recipe from the add activity to the RecipeListActivity.
+
+## RecipeAddActivity.java
+
+RecipeAddActivity.java is used to add new recipes.
+
+
+## IngredientAddFragment.java
+
+IngredientAddFragment.java is used by RecipeAddActivity.java to add new ingredients to new recipes.
+
+
 ## The Architecture Flow chart
 
 ![Our architecture](/Architecture/Architecture.png)
