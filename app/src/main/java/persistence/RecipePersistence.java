@@ -8,7 +8,7 @@ public interface RecipePersistence {
 
     List<Recipe> getRecipes();
 
-    List<Recipe> getRecipe(Recipe currentRecipe);
+    Recipe getRecipe(Recipe currentRecipe);
 
     Recipe insertRecipe(Recipe currentRecipe);
 

@@ -83,23 +83,20 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     }
 
     @Override
-    public List<Recipe> getRecipe(Recipe currentRecipe) {
-        final List<Recipe> recipes = new ArrayList<>();
+    public Recipe getRecipe(Recipe currentRecipe) {
         try (final Connection c = connection()) {
+            final Recipe recipe;
             final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPE WHERE recipeID = ?");
             st.setString(1, currentRecipe.getRecipeID());
 
             final ResultSet rs = st.executeQuery();
-            while(rs.next()) {
-                ArrayList<Ingredient> ingredientsList = ingredientPersistence.getRecipeIngredients(currentRecipe.getRecipeID());
-                ArrayList<String> categoryList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM CATEGORIES WHERE RECIPEID=?", "category");
-                final Recipe recipe = createRecipe(rs, ingredientsList, categoryList);
-                recipes.add(recipe);
-            }
+            ArrayList<Ingredient> ingredientsList = ingredientPersistence.getRecipeIngredients(currentRecipe.getRecipeID());
+            ArrayList<String> categoryList = getListForRecipeFromDB(c, currentRecipe.getRecipeID(), "SELECT * FROM CATEGORIES WHERE RECIPEID=?", "category");
+            recipe = createRecipe(rs, ingredientsList, categoryList);
             rs.close();
             st.close();
 
-            return recipes;
+            return recipe;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
