@@ -5,7 +5,7 @@ A technical debt that got clean up was the GroceryList, it was not using the per
 Show links to a commit where you paid off technical debt. Write 2-5 sentences
 that explain what debt was paid, and what its classification is.
 https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/commit/3504065f0020ba8c92b821f615c9cf95b1240b3b
-
+The debt was paid is the structural debt, we could have structured it in the beginning but due to time constraints, we were not able to do so.
 
 What technical debt did you leave?
 ==================================
@@ -13,7 +13,7 @@ In the recipe, we instead of a list of instruction, we save the instructions as 
 
 What one item would you like to fix, and can't? Anything you write will not
 be marked negatively. Classify this debt.
-This was a prudent-inadvertent, we are not sure why we chose this way.
+This was a prudent-inadvertent, we could have linked the items in the database but we did not do that in the beginning.
 
 Discuss a Feature or User Story that was cut/re-prioritized
 ============================================
@@ -39,16 +39,50 @@ The user should be able to delete a recipe from the database.
 
 Write a discussion about an end-to-end test that you wrote. What did you test,
 how did you set up the test so it was not flaky? Provide a link to that test.
+Based on the user story, the acceptance test is a reflection on the end user.
+
+There are two sides to our Android application: GroceryList and RecipeList.
+
+We did a basic home screen test to ensure that both of these options are present.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/HomeActivityTest.java
+
+Adding an ingredient to the grocery list.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/GroceryAddAcceptanceTest.java
+
+Remoce an ingredient from the grocery list.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/GroceryListRemoveIngredientAcceptance.java
+
+Update an ingredient in the grocery list.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/GroceryListUpdateIngredientAcceptance.java
+
+Ensure the layout of the RecipeList side is as expected.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/RecipeListAcceptance.java
+
+Add new recipe into the recipe list.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/RecipeListAddAcceptance.java
+
+Check the catagory of the Recipe List.
+https://code.cs.umanitoba.ca/winter-2022-a02/group-8/recipe-app/-/blob/main/app/src/androidTest/java/presentation/RecipeListCategoryAcceptance.java
+
 
 Acceptance test, untestable
 ===============
+The majority of the time it took to wrote the acceptance test was to figure out the dependency and use Expresso.
+We have considered to use other libraries but Expresso seems to be the most straightforward one.
+We did not separate our database acceptance test from the normal applicaiton, this is the reason why the device might need be wipe before starting.
+The acceptance test was very straightforward once we know what to do.
 
 What challenges did you face when creating acceptance tests? What was difficult
 or impossible to test?
+When deleting the ingredent from the GroceryList or recipe from the RecipeList, it was not possible to find the element to check that it doesnt exist.
 
 Velocity/teamwork
 =================
-7/14 issues complete for this iteration.
+7/14 issues complete for iteration 3.
+
+We have definitely noticed an improvement in our velocity as we are able to push more issues through. However, our estimate is still not accurate since our team members are getting other school course loads and it is unpredictable.
 
 Did your estimates get better or worse through the course? Show some
 evidence of the estimates/actuals from tasks.
+
+
