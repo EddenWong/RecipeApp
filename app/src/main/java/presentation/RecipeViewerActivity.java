@@ -146,7 +146,10 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
             for(int i = 0; i < myRecipe.getIngredientList().size(); i++)
             {
-                accessGrocery.insertItem(myRecipe.getIngredientList().get(i).toString());
+                if(!accessGrocery.getGroceryList().contains(myRecipe.getIngredientList().get(i).getIngredientName())) {
+                    System.out.println(i);
+                    accessGrocery.insertItem(myRecipe.getIngredientList().get(i).getIngredientName());
+                }
             }
         }
     }
