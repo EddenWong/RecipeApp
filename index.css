@@ -1,4 +1,8 @@
 
+* {
+font-family: 'Raleway', sans-serif;}
+
+
 .header
 {
     padding: 80px;
@@ -12,12 +16,19 @@
     font-size: 40px;
 }
 
-.Contents
+.contents
 {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
+
+ul {
+  display: table;
+  margin: 0 auto;
+}
+
 
 #README
 {
