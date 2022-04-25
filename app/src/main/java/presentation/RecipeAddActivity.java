@@ -112,8 +112,10 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
             ingredientList.addAll(myRecipe.getIngredientList());
             ingredientArrayAdapter.notifyDataSetChanged();
 
-            String newInstuctions = myRecipe.getInstructions().replace("$","\n");
-            instructions.setText(newInstuctions);
+            if(myRecipe.getInstructions() != null) {
+                String newInstuctions = myRecipe.getInstructions().replace("$", "\n");
+                instructions.setText(newInstuctions);
+            }
             for(int i = 0; i < myCategories.length; i++)
             {
                 if(myRecipe.getCategoryList().contains(myCategories[i]))
@@ -190,6 +192,15 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
                 finish();
             }
         }
+        else if(TextUtils.isEmpty(name.getText().toString()))
+        {
+            Toast.makeText(RecipeAddActivity.this, "Please fill in a name", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(instructions.getText().toString()))
+        {
+            Toast.makeText(RecipeAddActivity.this, "Please fill in some instructions", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void setIngredientListHeight()
@@ -204,16 +215,20 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
     private boolean checkInt(String s)
     {
         boolean returnVal = true;
-        try
-        {
-            Integer.parseInt(s);
+
+        if(!TextUtils.isEmpty(s)) {
+            try {
+                Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Time too long", Toast.LENGTH_SHORT).show();
+                returnVal = false;
+            }
         }
-        catch (NumberFormatException e)
+        else
         {
-            Toast.makeText(this, "Time too long", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill in a time", Toast.LENGTH_SHORT).show();
             returnVal = false;
         }
-
         return returnVal;
     }
 
