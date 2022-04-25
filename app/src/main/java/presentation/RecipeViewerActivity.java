@@ -1,8 +1,11 @@
 package presentation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -19,7 +22,9 @@ import com.example.recipeapp.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import business.AccessGroceryList;
 import business.AccessRecipes;
+import objects.Ingredient;
 import objects.Recipe;
 
 
@@ -28,6 +33,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
     private Recipe myRecipe;
     private WebView mWebView;
     private AccessRecipes accessRecipes;
+    private Menu myMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +69,40 @@ public class RecipeViewerActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.recipe_pop_up_menu, menu);
+        myMenu = menu;
+        updateMenuText();
+
+
         return true;
     }
 
-    private String formatIngredients(ArrayList<String> ingredientList)
+    private void updateMenuText()
+    {
+        MenuItem bookmarkMenu = myMenu.findItem(R.id.recipeBookmark);
+
+        if(myRecipe.getCategoryList().contains("Bookmarked")) {
+            bookmarkMenu.setTitle("Unbookmark");
+        }
+        else {
+            bookmarkMenu.setTitle("Bookmark");
+        }
+
+    }
+
+
+    private String formatIngredients(ArrayList<Ingredient> ingredientList)
     {
         String formattedIngredients = "No ingredients found";
 
         if(ingredientList != null) {
             formattedIngredients = "";
             for (int i = 0; i < ingredientList.size(); i++) {
-                formattedIngredients += ingredientList.get(i).toString();
+                formattedIngredients += ingredientList.get(i).getQuantity() + " ";
+                formattedIngredients += ingredientList.get(i).getUnit() + "\t\t";
+                formattedIngredients += ingredientList.get(i).getIngredientName();
+                if (ingredientList.get(i).getNote() != null) {
+                    formattedIngredients += " (" + ingredientList.get(i).getNote() + ")";
+                }
 
                 if (i < ingredientList.size() - 1) {
                     formattedIngredients += "\n";
@@ -106,9 +135,67 @@ public class RecipeViewerActivity extends AppCompatActivity {
             case R.id.recipeBookmark:
                 bookmark();
                 break;
+            case R.id.recipeDelete:
+                delete();
+                break;
+            case R.id.recipeIngredientToGrocery:
+                addToGroceryList();
+                break;
+            case R.id.recipeEdit:
+                editRecipe();
+                break;
+
         }
 
         return true;
+    }
+
+    private void editRecipe()
+    {
+        Intent recipeIntent = new Intent(RecipeViewerActivity.this,RecipeAddActivity.class);
+        recipeIntent.putExtra("recipe",myRecipe);
+        startActivity(recipeIntent);
+    }
+
+
+    private void addToGroceryList()
+    {
+        if(myRecipe.getIngredientList() != null) {
+            AccessGroceryList accessGrocery = new AccessGroceryList();
+
+            for(int i = 0; i < myRecipe.getIngredientList().size(); i++)
+            {
+                if(!accessGrocery.getGroceryList().contains(myRecipe.getIngredientList().get(i).getIngredientName())) {
+                    System.out.println(i);
+                    accessGrocery.insertItem(myRecipe.getIngredientList().get(i).getIngredientName());
+                }
+            }
+        }
+    }
+
+
+    private void delete()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(RecipeViewerActivity.this).create();
+        alertDialog.setTitle("Delete Recipe");
+        alertDialog.setMessage("Are you sure you want to delete " + myRecipe.getName() + "?");
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                accessRecipes.deleteRecipe(myRecipe);
+                finish();
+            }
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+
+        alertDialog.show();
+
     }
 
     private void doPrint() {
@@ -122,7 +209,6 @@ public class RecipeViewerActivity extends AppCompatActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //Log.i(TAG, "page finished loading " + url);
                 createWebPrintJob(view);
                 mWebView = null;
             }
@@ -198,10 +284,10 @@ public class RecipeViewerActivity extends AppCompatActivity {
         //If it is bookmarked, undo it
         //Construct new recipe and update the old one
         Recipe newRecipe;
-        int oldId = myRecipe.getRecipeID();
+        String oldId = myRecipe.getRecipeID();
         String oldName = myRecipe.getName();
         String oldNationality = myRecipe.getNationality();
-        ArrayList<String> oldIngredients = myRecipe.getIngredientList();
+        ArrayList<Ingredient> oldIngredients = myRecipe.getIngredientList();
         int oldPrep = myRecipe.getPrepTime();
         int oldCook = myRecipe.getCookTime();
         String oldSkill = myRecipe.getCookingSkillLevel();
@@ -232,6 +318,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
         //Replace old category
         TextView categories = findViewById(R.id.recipeCategories);
         categories.setText(myRecipe.getCategoryList().toString());
+        updateMenuText();
 
     }
 }

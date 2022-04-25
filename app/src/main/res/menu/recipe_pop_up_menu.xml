@@ -3,9 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/recipePrint"
+        android:title="@string/recipe_print_button" />
+    <item
+        android:id="@+id/recipeIngredientToGrocery"
+        android:title="@string/recipe_to_grocery_button" />
+    <item
         android:id="@+id/recipeBookmark"
         android:title="@string/recipe_bookmark_button" />
     <item
-        android:id="@+id/recipePrint"
-        android:title="@string/recipe_print_button" />
+        android:id="@+id/recipeDelete"
+        android:title="@string/recipe_delete_button" />
+    <item
+        android:id="@+id/recipeEdit"
+        android:title="@string/recipe_edit_button" />
 </menu>

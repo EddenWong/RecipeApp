@@ -50,10 +50,10 @@ Image of the recipe.
 
 public class Recipe implements Serializable {
     // Private member
-    private int recipeID;
+    private String recipeID;
     private String name;
     private String nationality;
-    private ArrayList<String> ingredientList;
+    private ArrayList<Ingredient> ingredientList;
     private int prepTime;
     private int cookTime;
     private String cookingSkillLevel;
@@ -68,7 +68,7 @@ public class Recipe implements Serializable {
     /* Recipe()
     Constructor to create an instance of recipe.
     */
-    public Recipe(final int newRecipeID) {
+    public Recipe(final String newRecipeID) {
         this.recipeID = newRecipeID;
         this.name = null;
         this.nationality = null;
@@ -83,7 +83,7 @@ public class Recipe implements Serializable {
         this.bookmarked = false;
     }
 
-    public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
+    public Recipe(String recipeID, String name, String nationality, ArrayList<Ingredient> ingredientList,
                   int prepTime, int cookTime, String cookingSkillLevel, String description,
                   String instructions, String link, ArrayList<String> categoryList)
     {
@@ -100,15 +100,11 @@ public class Recipe implements Serializable {
         this.categoryList = categoryList;
     }
 
-    public Recipe(int recipeID, String name, String nationality, ArrayList<String> ingredientList,
-                  int prepTime, int cookTime, String cookingSkillLevel, String description,
-                  String instructions, String link, ArrayList<String> categoryList, boolean bookmarked)
-    {
-        this(recipeID, name, nationality, ingredientList, prepTime, cookTime, cookingSkillLevel, description, instructions, link, categoryList);
-        this.bookmarked = bookmarked;
-    }
-
-    public int getRecipeID() { return this.recipeID; }
+    /* getRecipeID()
+    Return:
+    The recipe ID.
+    */
+    public String getRecipeID() { return this.recipeID; }
 
     /* getName()
     Return:
@@ -122,15 +118,18 @@ public class Recipe implements Serializable {
     */
     public String getNationality() { return this.nationality; }
 
+    /* getIngredientList()
+    Return:
+    The list of ingredients for the recipe.
+    */
+    public ArrayList<Ingredient> getIngredientList() {
+        return this.ingredientList;
+    }
+
     /* getPrepTime()
     Return:
     Prep time for the recipe.
     */
-
-    public ArrayList<String> getIngredientList() {
-        return this.ingredientList;
-    }
-
     public int getPrepTime() { return this.prepTime; }
 
     /* getCookTime()
@@ -163,21 +162,20 @@ public class Recipe implements Serializable {
     */
     public String getLink() { return this.link; }
 
+
     /* getCategoryList()
     Return:
     The list of filters for the recipe.
     */
     public ArrayList<String> getCategoryList() { return this.categoryList; }
 
-    /* getCategoryList()
+    /* toString()
     Return:
-    The bookmarking flag of the recipe.
+    Default string for the instance.
     */
-    public boolean getBookmarked() { return this.bookmarked; }
-
     public String toString()
     {
-        return name;
+        return this.getName();
     }
 
 }

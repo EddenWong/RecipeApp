@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.hsqldb.lib.LineGroupReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import business.AccessRecipes;
+import objects.Ingredient;
 import objects.Recipe;
 import persistence.RecipePersistence;
 import persistence.hsqldb.RecipePersistenceHSQLDB;
@@ -32,12 +34,13 @@ public class AccessRecipesIT {
     }
 
     @Test
-    public void testListRecipes() {
+    public void testGetRecipe() {
         final Recipe recipe;
 
         recipe = accessRecipes.getSequential();
+        System.out.println(recipe.getIngredientList().get(0).getIngredientName());
         assertNotNull("first sequential recipe should not be null", recipe);
-        assertTrue(1 == (recipe.getRecipeID()));
+        assertEquals("1", recipe.getRecipeID());
 
         System.out.println("Finished test AccessRecipes");
     }
@@ -45,6 +48,7 @@ public class AccessRecipesIT {
     @Test
     public void testGetRecipes() {
         final List<Recipe> recipes = accessRecipes.getRecipes();
+        System.out.println(recipes);
         assertEquals(5, recipes.size());
     }
 
@@ -60,21 +64,23 @@ public class AccessRecipesIT {
 
     @Test
     public void testInsertRecipe() {
-        ArrayList<String> ingredientList = new ArrayList<>();
-        ingredientList.add("Random ingred");
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        Ingredient ingredient = new Ingredient("fish", "10", "bro", "nothing");
+        ingredientList.add(ingredient);
 
         ArrayList<String> categoryList = new ArrayList<>();
         categoryList.add("Random Category");
 
-        final Recipe res = new Recipe(10, "Test Beef", "US", ingredientList, 5, 10, "Easy", "Description for recipe", "Instruction for recipe", "random link", categoryList);
+        final Recipe res = new Recipe("10", "Test Beef", "US", ingredientList, 5, 10, "Easy", "Description for recipe", "Instruction for recipe", "random link", categoryList);
         accessRecipes.insertRecipe(res);
         assertEquals(6, accessRecipes.getRecipes().size());
     }
 
     @Test
     public void testUpdateRecipe() {
-        ArrayList<String> ingredientList = new ArrayList<>();
-        ingredientList.add("Random ingred");
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        Ingredient ingredient = new Ingredient( "fish", "10", "bro", "nothing");
+        ingredientList.add(ingredient);
 
         ArrayList<String> categoryList = new ArrayList<>();
         categoryList.add("Random Category");

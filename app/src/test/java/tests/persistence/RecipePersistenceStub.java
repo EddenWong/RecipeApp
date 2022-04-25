@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import objects.Ingredient;
 import objects.Recipe;
 import persistence.RecipePersistence;
 
@@ -12,17 +13,22 @@ public class RecipePersistenceStub implements RecipePersistence {
 
     public RecipePersistenceStub() {
         this.recipes =new ArrayList<>();
-        ArrayList<String> ingredientList = new ArrayList<String>();
-        ingredientList.add("1 tps of sugar");
-        ingredientList.add("1 tps of salt");
-        ingredientList.add("1 tps of flour");
-        ingredientList.add("1 tbps of butter");
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        Ingredient ingredient = new Ingredient("fish", "10", "bro", "nothing");
+        Ingredient ingredient2 = new Ingredient("nom", "10", "bro", "nothing");
+        Ingredient ingredient3 = new Ingredient("fsh", "10", "bro", "nothing");
+        Ingredient ingredient4 = new Ingredient("ish", "10", "bro", "nothing");
+        ingredientList.add(ingredient);
+        ingredientList.add(ingredient2);
+        ingredientList.add(ingredient3);
+        ingredientList.add(ingredient4);
+
 
         ArrayList<String> categoryList = new ArrayList<String>();
-        ingredientList.add("Dessert");
+        categoryList.add("Dessert");
 
-        recipes.add(new Recipe(4, "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too easy", "Mix everything together. Eat it.", "MEME", categoryList));
-        recipes.add(new Recipe(5, "Difficult cake", "US", ingredientList, 5, 20, "Hard", "Too hard", "Mix everything together. Don't eat it.", "LMAO", categoryList));
+        recipes.add(new Recipe("4", "Easy cake", "US", ingredientList, 5, 10, "Easy", "Too easy", "Mix everything together. Eat it.", "MEME", categoryList));
+        recipes.add(new Recipe("5", "Difficult cake", "US", ingredientList, 5, 20, "Hard", "Too hard", "Mix everything together. Don't eat it.", "LMAO", categoryList));
     }
 
     @Override
@@ -31,10 +37,8 @@ public class RecipePersistenceStub implements RecipePersistence {
     }
 
     @Override
-    public List<Recipe> getRecipe(Recipe currentRecipe) {
-        List<Recipe> recipes = new ArrayList<>();
-        recipes.add(currentRecipe);
-        return Collections.unmodifiableList(recipes);
+    public Recipe getRecipe(Recipe currentRecipe) {
+        return currentRecipe;
     }
 
     public Recipe insertRecipe(Recipe currentRecipe) {

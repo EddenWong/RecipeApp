@@ -16,6 +16,8 @@ public class GroceryListTest{
    @Test
    public void groceryTest1() {
        GroceryList Grocery;
+       GroceryList grocList;
+
        System.out.println("\nStarting Grocery\n");
        ArrayList<String> groceryItems = new ArrayList<String>();
        groceryItems.add("sugar");
@@ -23,12 +25,12 @@ public class GroceryListTest{
        groceryItems.add("oil");
 
 
-//       assertNull(Grocery);
        Grocery = new GroceryList(groceryItems);
-
+       grocList = new GroceryList();
 
        //check if the object is not null after creation
        assertNotNull(Grocery);
+       assertNotNull(grocList);
        assertTrue(groceryItems.equals(Grocery.getGroceryList()));
 
        ArrayList<String> groceryItems2 = new ArrayList<String>();
