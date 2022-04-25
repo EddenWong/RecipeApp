@@ -1,14 +1,17 @@
 package presentation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -74,18 +78,26 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
         final ListView listView = findViewById(R.id.ingredientList);
         listView.setAdapter(ingredientArrayAdapter);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
-                ingredientList.remove(pos);
-                //Ingredient item = (Ingredient)adapterView.getItemAtPosition(position);
-                ingredientArrayAdapter.notifyDataSetChanged();
-                setIngredientListHeight();
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                new AlertDialog.Builder(RecipeAddActivity.this)
+                        .setTitle("Delete Ingredient")
+                        .setMessage("Do you really want to delete " + ingredientList.get(position).getIngredientName() + "?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                return true;
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                ingredientList.remove(position);
+                                ingredientArrayAdapter.notifyDataSetChanged();
+                                setIngredientListHeight();
+
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+
             }
         });
+
 
         //If a bundle was passed through
         if(getIntent().getExtras() != null)
@@ -104,8 +116,8 @@ public class RecipeAddActivity extends AppCompatActivity implements ReturnIngred
             instructions.setText(newInstuctions);
             for(int i = 0; i < myCategories.length; i++)
             {
-                if(myRecipe.getCategoryList().contains(myCategories[i]));
-                categories.setSelection(i);
+                if(myRecipe.getCategoryList().contains(myCategories[i]))
+                    categories.setSelection(i);
             }
 
             id = myRecipe.getRecipeID();

@@ -179,6 +179,7 @@ public class RecipeViewerActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(RecipeViewerActivity.this).create();
         alertDialog.setTitle("Delete Recipe");
         alertDialog.setMessage("Are you sure you want to delete " + myRecipe.getName() + "?");
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
