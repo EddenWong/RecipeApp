@@ -84,5 +84,6 @@ We have definitely noticed an improvement in our velocity as we are able to push
 
 Did your estimates get better or worse through the course? Show some
 evidence of the estimates/actuals from tasks.
-
+We estimated to spent 3 days and 6 hours and we ended up spending 4 days and 2 hours.
+This is different is high and it is evidence that we need to work on time management.
 
