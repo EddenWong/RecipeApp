@@ -35,7 +35,7 @@ public class GroceryListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Create a grocery list and give GUI the array list
-        groceryList = new GroceryList().getArrayList();
+        groceryList = new ArrayList<>();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
